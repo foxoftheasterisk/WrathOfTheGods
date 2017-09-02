@@ -5,7 +5,12 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrathOfTheGods", "WrathOfTheGods\WrathOfTheGods.csproj", "{FDD40824-9301-4F05-80FB-C2B054BC83F7}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ScreenManager", "ScreenManager\ScreenManager.shproj", "{DC6D9569-2DD3-4737-9D6C-E8DB9C77E328}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		ScreenManager\ScreenManager.projitems*{dc6d9569-2dd3-4737-9d6c-e8db9c77e328}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

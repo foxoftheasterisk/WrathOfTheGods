@@ -1,0 +1,3 @@
+[submodule "ScreenManager"]
+	path = ScreenManager
+	url = git@github.com:littlebeast/ScreenManager.git
