@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Input.Touch;
 using Screens;
 
 namespace WrathOfTheGods
@@ -13,7 +14,7 @@ namespace WrathOfTheGods
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Texture2D greece;
+        MapScreen mapScreen;
 
         public TopLevel()
         {
@@ -34,7 +35,10 @@ namespace WrathOfTheGods
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
+            mapScreen = new MapScreen();
+            ScreenManager.screenManager.push(mapScreen);
+
+            TouchPanel.EnabledGestures = GestureType.FreeDrag | GestureType.DragComplete | GestureType.Pinch | GestureType.DoubleTap | GestureType.Hold;
 
             base.Initialize();
         }
@@ -48,8 +52,11 @@ namespace WrathOfTheGods
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-
+            Texture2D greece;
             greece = Content.Load<Texture2D>("greece");
+            mapScreen.Map = greece;
+            mapScreen.setScreenSize(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+            
         }
 
         /// <summary>
@@ -85,14 +92,7 @@ namespace WrathOfTheGods
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-
             ScreenManager.screenManager.draw(spriteBatch);
-
-            //TODO: temp
-            spriteBatch.Draw(greece, new Vector2(0, 0), Color.White);
-
-            spriteBatch.End();
 
             base.Draw(gameTime);
         }
