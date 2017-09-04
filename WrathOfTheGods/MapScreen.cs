@@ -19,28 +19,28 @@ namespace WrathOfTheGods
     class MapScreen : Screen
     {
         public Texture2D Map
-        {
-            private get;
-            set;
-        }
+        { set; private get; }
+        public Texture2D CityTex
+        { set; private get; }
+        public Texture2D Path
+        { set; private get; }
+
         private Vector2 offset;
 
-        public int Scale
-        {
-            private get;
-            set;
-        }
 
-        public Texture2D Overlay
-        {
-            private get;
-            set;
-        }
+        public List<City> Cities
+        { set; private get; }
 
         private const int EDGE_BUFFER = 40;
         private const int EDGE_SPEED = 4;
         private int rightEdge;
         private int bottomEdge;
+
+        private const int scale = 5;
+        private const int cityTexSize = 30;
+        private const int citySize = cityTexSize * scale;
+        private Vector2 cityGate = new Vector2(citySize / 2, citySize - 2*scale);  //the offset from the top-left (where the sprite is drawn from) to the center-bottom, where paths are desired to come from
+        private Vector2 pathOffset;
 
         public MapScreen()
         {
@@ -53,21 +53,43 @@ namespace WrathOfTheGods
         /// </summary>
         /// <param name="width">The screen's horizontal size</param>
         /// <param name="height">The screen's vertical size</param>
-        public void setScreenSize(int width, int height)
+        public void SetScreenSize(int width, int height)
         {
-            rightEdge = width - (Map.Width * Scale);
-            bottomEdge = height - (Map.Height * Scale);
+            rightEdge = width - (Map.Width * scale);
+            bottomEdge = height - (Map.Height * scale);
         }
 
         public void draw(SpriteBatch drawer)
         {
             //drawer.Draw(Map, offset, Color.White);
-            drawer.Draw(Map, offset, null, Color.White, 0, new Vector2(0,0), Scale, SpriteEffects.None, 0);
+            drawer.Draw(Map, offset, null, Color.White, 0, new Vector2(0,0), scale, SpriteEffects.None, 0);
             //might actually be easier to do the rectangle version...
 
-            if(Overlay != null)
+            if (pathOffset.X == 0 && Path != null)
+                pathOffset = new Vector2(Path.Width / 2, 0);
+
+            foreach(City city in Cities)
             {
-                drawer.Draw(Overlay, offset + new Vector2(100, 100), null, Color.White, 0, new Vector2(0, 0), Scale, SpriteEffects.None, 1);
+                drawer.Draw(CityTex, offset + city.Position * scale, null, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0.5f);
+
+                Vector2 home = (city.Position * scale) + offset + cityGate;
+                foreach(City neighbor in city.getNeighbors())
+                {
+                    //to prevent two paths drawing over each other, and to make sure paths draw in the direction that looks better
+                    if(city.Position.X >= neighbor.Position.X)
+                    {
+                        Vector2 destination = neighbor.Position * scale + offset + cityGate;
+
+                        Vector2 route = home - destination;
+                        float angle = (float)Math.Atan2(route.Y, route.X);
+                        //initial angle is off by a quarter circle, so
+                        angle += .5f * (float)Math.PI;
+
+                        Rectangle pathBox = new Rectangle(0, 0, Path.Width, (int)Math.Floor(route.Length() / scale));
+                        drawer.Draw(Path, home - pathOffset * scale, pathBox, Color.White, angle, pathOffset, scale, SpriteEffects.None, 0.25f);
+                        
+                    }
+                }
             }
         }
 

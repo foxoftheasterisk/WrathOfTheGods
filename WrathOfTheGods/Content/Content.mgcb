@@ -10,6 +10,8 @@
 
 #-------------------------------- References --------------------------------#
 
+/reference:..\bin\Android\AnyCPU\Debug\WrathOfTheGods.dll
+/reference:..\bin\Android\AnyCPU\Debug\MonoGame.Framework.dll
 
 #---------------------------------- Content ---------------------------------#
 

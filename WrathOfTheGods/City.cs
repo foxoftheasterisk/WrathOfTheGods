@@ -20,9 +20,11 @@ namespace WrathOfTheGods
         public string Name
         { get; private set; }
 
+
         [ContentSerializer]
         public string Region
         { get; private set; }
+
 
         public Vector2 Position
         {
@@ -44,6 +46,11 @@ namespace WrathOfTheGods
         //...i guess it might actually be smaller storage, though?  or at least the serialization is
         private List<City> cityList;
 
+        public City()
+        {
+            neighbors = new List<int>();
+        }
+
         public City(string name, string region, Vector2 _position, List<City> parent)
         {
             Name = name;
@@ -59,6 +66,11 @@ namespace WrathOfTheGods
             foreach (int neighbor in neighbors)
                 list.Add(cityList[neighbor]);
             return list;
+        }
+
+        public List<int> getNeighborIndices()
+        {
+            return new List<int>(neighbors);
         }
 
         public void AddNeighbor(City neighbor)

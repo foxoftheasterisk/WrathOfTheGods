@@ -1,23 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:Generic="System.Collections.Generic">
-  <Asset Type="Generic:List[WrathOfTheGods.City]">
-    <Item>
-      <Name>sdfg</Name>
-      <Region>fffffffffffffffffffff</Region>
-      <position>273 283</position>
-      <neighbors>1 2</neighbors>
-    </Item>
-    <Item>
-      <Name>we</Name>
-      <Region>eiiiiiiiiiiiiii</Region>
-      <position>419 239</position>
-      <neighbors>0</neighbors>
-    </Item>
-    <Item>
-      <Name>yo</Name>
-      <Region>yoma</Region>
-      <position>227 387</position>
-      <neighbors>0</neighbors>
-    </Item>
+<XnaContent xmlns:WrathOfTheGods="WrathOfTheGods">
+  <Asset Type="WrathOfTheGods:City">
+    <Name>bluh</Name>
+    <Region>balasdgalu</Region>
+    <position>519 607</position>
+    <neighbors>2 0 0 0 0</neighbors>
   </Asset>
 </XnaContent>

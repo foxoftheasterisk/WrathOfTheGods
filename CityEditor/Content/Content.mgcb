@@ -57,8 +57,3 @@
 /processorParam:TextureFormat=Color
 /build:path.png
 
-#begin cities.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:cities.xml
-

@@ -54,7 +54,7 @@ namespace CityEditor
             editor.Path = Content.Load<Texture2D>("path");
             editor.Font = Content.Load<SpriteFont>("somefont");
 
-            editor.cities = Content.Load<List<WrathOfTheGods.City>>("cities");
+            //editor.cities = Content.Load<List<WrathOfTheGods.City>>("cities");
 
             graphics.PreferredBackBufferWidth = map.Width;
             int height = GraphicsDevice.DisplayMode.Height - 150;
