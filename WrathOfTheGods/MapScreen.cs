@@ -25,6 +25,18 @@ namespace WrathOfTheGods
         }
         private Vector2 offset;
 
+        public int Scale
+        {
+            private get;
+            set;
+        }
+
+        public Texture2D Overlay
+        {
+            private get;
+            set;
+        }
+
         private const int EDGE_BUFFER = 40;
         private const int EDGE_SPEED = 4;
         private int rightEdge;
@@ -43,13 +55,20 @@ namespace WrathOfTheGods
         /// <param name="height">The screen's vertical size</param>
         public void setScreenSize(int width, int height)
         {
-            rightEdge = width - Map.Width;
-            bottomEdge = height - Map.Height;
+            rightEdge = width - (Map.Width * Scale);
+            bottomEdge = height - (Map.Height * Scale);
         }
 
         public void draw(SpriteBatch drawer)
         {
-            drawer.Draw(Map, offset, Color.White);
+            //drawer.Draw(Map, offset, Color.White);
+            drawer.Draw(Map, offset, null, Color.White, 0, new Vector2(0,0), Scale, SpriteEffects.None, 0);
+            //might actually be easier to do the rectangle version...
+
+            if(Overlay != null)
+            {
+                drawer.Draw(Overlay, offset + new Vector2(100, 100), null, Color.White, 0, new Vector2(0, 0), Scale, SpriteEffects.None, 1);
+            }
         }
 
         public bool drawUnder()

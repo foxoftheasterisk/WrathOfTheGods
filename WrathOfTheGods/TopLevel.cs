@@ -55,8 +55,10 @@ namespace WrathOfTheGods
             Texture2D greece;
             greece = Content.Load<Texture2D>("greece");
             mapScreen.Map = greece;
+            mapScreen.Scale = 5;
             mapScreen.setScreenSize(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-            
+
+            mapScreen.Overlay = Content.Load<Texture2D>("basiccity");
         }
 
         /// <summary>
@@ -92,7 +94,7 @@ namespace WrathOfTheGods
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            ScreenManager.screenManager.draw(spriteBatch);
+            ScreenManager.screenManager.draw(spriteBatch, SamplerState.PointClamp);
 
             base.Draw(gameTime);
         }
