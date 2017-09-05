@@ -3,16 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace WrathOfTheGods
+namespace WrathOfTheGods.XMLLibrary
 {
     public class City
     {
@@ -60,7 +54,12 @@ namespace WrathOfTheGods
             neighbors = new List<int>();
         }
 
-        public List<City> getNeighbors()
+        public void AddParent(List<City> parent)
+        {
+            cityList = parent;
+        }
+
+        public List<City> GetNeighbors()
         {
             List<City> list = new List<City>();
             foreach (int neighbor in neighbors)
@@ -68,7 +67,7 @@ namespace WrathOfTheGods
             return list;
         }
 
-        public List<int> getNeighborIndices()
+        public List<int> GetNeighborIndices()
         {
             return new List<int>(neighbors);
         }

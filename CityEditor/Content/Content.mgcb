@@ -10,7 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\bin\Windows\x86\Debug\WrathOfTheGods.dll
+/reference:..\..\WotGXMLLibrary\bin\Debug\WotGXMLLibrary.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -56,4 +56,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:path.png
+
+#begin cities.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:cities.xml
 

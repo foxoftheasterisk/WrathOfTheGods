@@ -54,7 +54,15 @@ namespace CityEditor
             editor.Path = Content.Load<Texture2D>("path");
             editor.Font = Content.Load<SpriteFont>("somefont");
 
-            //editor.cities = Content.Load<List<WrathOfTheGods.City>>("cities");
+            List<WrathOfTheGods.XMLLibrary.City> cities = Content.Load<List<WrathOfTheGods.XMLLibrary.City>>("cities");
+
+            //TODO: see if I can get rid of this
+            foreach (WrathOfTheGods.XMLLibrary.City city in cities)
+            {
+                city.AddParent(cities);
+            }
+
+            editor.cities = cities;
 
             graphics.PreferredBackBufferWidth = map.Width;
             int height = GraphicsDevice.DisplayMode.Height - 150;
@@ -94,7 +102,7 @@ namespace CityEditor
 
                 using (XmlWriter writer = XmlWriter.Create("cities.xml", settings))
                 {
-                    IntermediateSerializer.Serialize<List<WrathOfTheGods.City>>(writer, editor.cities, null);
+                    IntermediateSerializer.Serialize<List<WrathOfTheGods.XMLLibrary.City>>(writer, editor.cities, null);
                 }
 
                 Exit();

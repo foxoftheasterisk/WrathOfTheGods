@@ -87,12 +87,6 @@
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\WrathOfTheGods\WrathOfTheGods.csproj">
-      <Project>{fdd40824-9301-4f05-80fb-c2b054bc83f7}</Project>
-      <Name>WrathOfTheGods</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="CityNameEntryBox.resx">
       <DependentUpon>CityNameEntryBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +100,12 @@
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WotGXMLLibrary\WotGXMLLibrary.csproj">
+      <Project>{e3e8c63f-4fec-4944-961b-77703569375d}</Project>
+      <Name>WotGXMLLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />

@@ -1,9 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:WrathOfTheGods="WrathOfTheGods">
-  <Asset Type="WrathOfTheGods:City">
-    <Name>bluh</Name>
-    <Region>balasdgalu</Region>
-    <position>519 607</position>
-    <neighbors>2 0 0 0 0</neighbors>
+<XnaContent xmlns:Generic="System.Collections.Generic">
+  <Asset Type="Generic:List[WrathOfTheGods.XMLLibrary.City]">
+    <Item>
+      <Name>Corinth</Name>
+      <Region>Corinthia</Region>
+      <position>578 812</position>
+      <neighbors>2 3</neighbors>
+    </Item>
+    <Item>
+      <Name>Sparta</Name>
+      <Region>Laconia</Region>
+      <position>534 1015</position>
+      <neighbors>3 2</neighbors>
+    </Item>
+    <Item>
+      <Name>Argos</Name>
+      <Region>Argolis</Region>
+      <position>569 894</position>
+      <neighbors>1 0</neighbors>
+    </Item>
+    <Item>
+      <Name>Megalopolis</Name>
+      <Region>Arcadia</Region>
+      <position>449 897</position>
+      <neighbors>1 0</neighbors>
+    </Item>
   </Asset>
 </XnaContent>

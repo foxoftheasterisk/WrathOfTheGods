@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Windows.Forms;
-using WrathOfTheGods;
+using WrathOfTheGods.XMLLibrary;
 
 namespace CityEditor
 {
@@ -142,7 +142,7 @@ namespace CityEditor
                 spriteBatch.Draw(CityTex, city.Position + offset, null, Color.White, 0f, new Vector2(0), 1, SpriteEffects.None, 0.5f);
 
                 Vector2 home = city.Position + offset + cityGate;
-                foreach (City neighbor in city.getNeighbors())
+                foreach (City neighbor in city.GetNeighbors())
                 {
                     Vector2 destination = neighbor.Position + offset + cityGate;
 
