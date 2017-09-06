@@ -12,12 +12,12 @@ namespace WrathOfTheGods.XMLLibrary
     {
         [ContentSerializer]
         public string Name
-        { get; private set; }
+        { get; protected set; }
 
 
         [ContentSerializer]
         public string Region
-        { get; private set; }
+        { get; protected set; }
 
 
         public Vector2 Position
@@ -26,26 +26,39 @@ namespace WrathOfTheGods.XMLLibrary
             {
                 return new Vector2(position.X, position.Y);
             }
+            protected set
+            {
+                position = value;
+            }
         }
         [ContentSerializer]
-        private Vector2 position;
+        protected Vector2 position;
 
         [ContentSerializer]
-        private List<int> neighbors;
+        protected List<int> neighbors;
 
         //public Vector2 spriteVector
         //TODO: draw individual sprites
 
         //this awkwardness brought to you by the linker crashing when attempting to add content.pipeline to an android project!
         //...i guess it might actually be smaller storage, though?  or at least the serialization is
-        private List<City> cityList;
+        protected List<City> cityList;
 
         public City()
         {
             neighbors = new List<int>();
         }
 
-        public City(string name, string region, Vector2 _position, List<City> parent)
+        //I want this to be protected, but if it is then EditableCity can't actually call it :/
+        public City(City city)
+        {
+            Name = city.Name;
+            Region = city.Region;
+            position = city.Position;
+            neighbors = city.GetNeighborIndices();
+        }
+
+        protected City(string name, string region, Vector2 _position, List<City> parent)
         {
             Name = name;
             Region = region;
@@ -54,6 +67,10 @@ namespace WrathOfTheGods.XMLLibrary
             neighbors = new List<int>();
         }
 
+        /// <summary>
+        /// Adds a reference to the list of cities; must be called before neighbors can be referenced.
+        /// </summary>
+        /// <param name="parent"></param>
         public void AddParent(List<City> parent)
         {
             cityList = parent;
@@ -67,30 +84,14 @@ namespace WrathOfTheGods.XMLLibrary
             return list;
         }
 
-        //probably unecessary!
         public List<int> GetNeighborIndices()
         {
             return new List<int>(neighbors);
         }
 
-        public bool isNeighbor(City other)
+        public bool HasNeighbor(City other)
         {
             return neighbors.Contains(cityList.IndexOf(other));
-        }
-
-        public void AddNeighbor(City neighbor)
-        {
-            neighbors.Add(cityList.IndexOf(neighbor));
-        }
-
-        public void RemoveNeighbor(City neighbor)
-        {
-            neighbors.Remove(cityList.IndexOf(neighbor));
-        }
-
-        public void Move(Vector2 vector)
-        {
-            position += vector;
         }
     }
 }

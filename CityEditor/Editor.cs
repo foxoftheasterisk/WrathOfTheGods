@@ -39,7 +39,7 @@ namespace CityEditor
 
 
         TopLevel.ClickType actionType = TopLevel.ClickType.None;
-        City activeCity = null;
+        EditableCity activeCity = null;
         Point lastMousePos;
 
         internal void Update(TopLevel.ClickType clickType, Point mouse, int scroll)
@@ -49,16 +49,9 @@ namespace CityEditor
             switch(clickType)
             {
                 case TopLevel.ClickType.Double:
-
-                    CityNameEntryBox box = new CityNameEntryBox();
-                    DialogResult result = box.ShowDialog();
-
-                    if (result == DialogResult.Cancel)
-                        break;
-
-                    cities.Add(new City(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2(), cities));
-
+                    DoubleClickFunctions(mouse);
                     break;
+
                 case TopLevel.ClickType.Left:
                     if(activeCity != null && actionType == TopLevel.ClickType.Left)
                     {
@@ -67,7 +60,7 @@ namespace CityEditor
                         break;
                     }
 
-                    foreach (City city in cities)
+                    foreach (EditableCity city in cities)
                     {
                         if(city.Position.X < mouse.X && city.Position.Y < mouse.Y
                            && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
@@ -76,13 +69,13 @@ namespace CityEditor
                             actionType = clickType;
                         }
                     }
-
                     break;
+
                 case TopLevel.ClickType.Right:
                     if (activeCity != null && actionType == TopLevel.ClickType.Right)
                         break;
 
-                    foreach (City city in cities)
+                    foreach (EditableCity city in cities)
                     {
                         if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
                            && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
@@ -91,20 +84,28 @@ namespace CityEditor
                             actionType = clickType;
                         }
                     }
-
                     break;
+
                 case TopLevel.ClickType.None:
                     if (activeCity != null && actionType == TopLevel.ClickType.Right)
                     {
-                        foreach (City city in cities)
+                        foreach (EditableCity city in cities)
                         {
                             if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
                                && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
                             {
                                 if(activeCity != city)
                                 {
-                                    city.AddNeighbor(activeCity);
-                                    activeCity.AddNeighbor(city);
+                                    if (activeCity.HasNeighbor(city))
+                                    {
+                                        city.RemoveNeighbor(activeCity);
+                                        activeCity.RemoveNeighbor(city);
+                                    }
+                                    else
+                                    {
+                                        city.AddNeighbor(activeCity);
+                                        activeCity.AddNeighbor(city);
+                                    }
                                 }
                             }
                         }
@@ -127,6 +128,42 @@ namespace CityEditor
             lastMousePos = mouse;
         }
 
+        private void DoubleClickFunctions(Point mouse)
+        {
+            //only declared now to prevent scope clashing
+            DialogResult result;
+
+            //first, try to delete
+            foreach (EditableCity city in cities)
+            {
+                if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
+                   && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
+                {
+                    result = MessageBox.Show("Are you sure you want to remove " + city.Name + ", " + city.Region + "?", "Are you sure?", MessageBoxButtons.YesNo);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        foreach (EditableCity c in cities)
+                        {
+                            c.RemoveCity(city);
+                        }
+                        cities.Remove(city);
+                    }
+
+                    return;
+                }
+            }
+
+            //then, try to create
+            CityNameEntryBox box = new CityNameEntryBox();
+            result = box.ShowDialog();
+
+            if (result == DialogResult.Cancel)
+                return;
+
+            cities.Add(new EditableCity(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2(), cities));
+        }
+
         //rotation code based on https://gamedev.stackexchange.com/a/44016
 
         internal void Draw(SpriteBatch spriteBatch)
@@ -137,12 +174,12 @@ namespace CityEditor
 
             spriteBatch.Draw(Map, offset, Color.White);
 
-            foreach(City city in cities)
+            foreach(EditableCity city in cities)
             {
                 spriteBatch.Draw(CityTex, city.Position + offset, null, Color.White, 0f, new Vector2(0), 1, SpriteEffects.None, 0.5f);
 
                 Vector2 home = city.Position + offset + cityGate;
-                foreach (City neighbor in city.GetNeighbors())
+                foreach (EditableCity neighbor in city.GetNeighbors())
                 {
                     Vector2 destination = neighbor.Position + offset + cityGate;
 

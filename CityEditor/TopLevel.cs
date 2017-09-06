@@ -54,12 +54,16 @@ namespace CityEditor
             editor.Path = Content.Load<Texture2D>("path");
             editor.Font = Content.Load<SpriteFont>("somefont");
 
-            List<WrathOfTheGods.XMLLibrary.City> cities = Content.Load<List<WrathOfTheGods.XMLLibrary.City>>("cities");
 
-            //TODO: see if I can get rid of this
-            foreach (WrathOfTheGods.XMLLibrary.City city in cities)
+            List<WrathOfTheGods.XMLLibrary.City> xmlCities = Content.Load<List<WrathOfTheGods.XMLLibrary.City>>("cities");
+
+            List<WrathOfTheGods.XMLLibrary.City> cities = new List<WrathOfTheGods.XMLLibrary.City>();
+
+            foreach (WrathOfTheGods.XMLLibrary.City city in xmlCities)
             {
-                city.AddParent(cities);
+                WrathOfTheGods.XMLLibrary.City clone = new EditableCity(city);
+                cities.Add(clone);
+                clone.AddParent(cities);
             }
 
             editor.cities = cities;
@@ -85,7 +89,7 @@ namespace CityEditor
         //double click handling code mostly copied from https://stackoverflow.com/questions/16111555/how-to-subscribe-to-double-clicks
 
         double ClickTimer = 0;
-        internal enum ClickType { Left, Double, Right, Middle, None}
+        internal enum ClickType { Left, Double, Right, None}
         bool clickHeld = false;
         int lastScroll = 0;
         /// <summary>
@@ -100,9 +104,15 @@ namespace CityEditor
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
 
+                List<WrathOfTheGods.XMLLibrary.City> cities = new List<WrathOfTheGods.XMLLibrary.City>();
+                foreach (EditableCity city in editor.cities)
+                {
+                    cities.Add(city.Base());
+                }
+
                 using (XmlWriter writer = XmlWriter.Create("cities.xml", settings))
                 {
-                    IntermediateSerializer.Serialize<List<WrathOfTheGods.XMLLibrary.City>>(writer, editor.cities, null);
+                    IntermediateSerializer.Serialize<List<WrathOfTheGods.XMLLibrary.City>>(writer, cities, null);
                 }
 
                 Exit();
