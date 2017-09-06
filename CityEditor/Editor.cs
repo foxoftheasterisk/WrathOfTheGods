@@ -23,14 +23,14 @@ namespace CityEditor
         public SpriteFont Font
         { set; private get; }
 
-        public List<City> cities;
+        public SerializableList<City> cities;
 
         private const int citySize = 30;
         private Vector2 cityGate = new Vector2(citySize / 2, citySize);
 
         public Editor()
         {
-            cities = new List<City>();
+            cities = new SerializableList<City>();
         }
 
         private int vertOffset;
@@ -56,7 +56,7 @@ namespace CityEditor
                     if (result == DialogResult.Cancel)
                         break;
 
-                    cities.Add(new City(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2(), cities));
+                    cities.Add(new City(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2()));
 
                     break;
                 case TopLevel.ClickType.Left:

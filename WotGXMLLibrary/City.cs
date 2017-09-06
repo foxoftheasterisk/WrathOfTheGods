@@ -30,56 +30,38 @@ namespace WrathOfTheGods.XMLLibrary
         [ContentSerializer]
         private Vector2 position;
 
-        [ContentSerializer]
-        private List<int> neighbors;
+        [ContentSerializer(SharedResource = true)]
+        private SerializableList<City> neighbors;
 
         //public Vector2 spriteVector
         //TODO: draw individual sprites
 
-        //this awkwardness brought to you by the linker crashing when attempting to add content.pipeline to an android project!
-        //...i guess it might actually be smaller storage, though?  or at least the serialization is
-        private List<City> cityList;
-
         public City()
         {
-            neighbors = new List<int>();
+            neighbors = new SerializableList<City>();
         }
 
-        public City(string name, string region, Vector2 _position, List<City> parent)
+        public City(string name, string region, Vector2 _position)
         {
             Name = name;
             Region = region;
             position = _position;
-            cityList = parent;
-            neighbors = new List<int>();
-        }
-
-        public void AddParent(List<City> parent)
-        {
-            cityList = parent;
+            neighbors = new SerializableList<City>();
         }
 
         public List<City> GetNeighbors()
         {
-            List<City> list = new List<City>();
-            foreach (int neighbor in neighbors)
-                list.Add(cityList[neighbor]);
-            return list;
-        }
-
-        public List<int> GetNeighborIndices()
-        {
-            return new List<int>(neighbors);
+            return new List<City>(neighbors);
         }
 
         public void AddNeighbor(City neighbor)
         {
-            neighbors.Add(cityList.IndexOf(neighbor));
+            neighbors.Add(neighbor);
         }
 
         public void RemoveNeighbor(City neighbor)
         {
-            neighbors.Remove(cityList.IndexOf(neighbor));
+            neighbors.Remove(neighbor);
         }
 
         public void Move(Vector2 vector)
