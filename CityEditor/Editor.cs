@@ -49,7 +49,7 @@ namespace CityEditor
             switch(clickType)
             {
                 case TopLevel.ClickType.Double:
-                    DoubleClickFunctions(mouse);
+                    DoubleClickFunctions();
                     break;
 
                 case TopLevel.ClickType.Left:
@@ -126,43 +126,47 @@ namespace CityEditor
             }
 
             lastMousePos = mouse;
-        }
 
-        private void DoubleClickFunctions(Point mouse)
-        {
-            //only declared now to prevent scope clashing
-            DialogResult result;
-
-            //first, try to delete
-            foreach (EditableCity city in cities)
+            void DoubleClickFunctions()
             {
-                if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
-                   && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
+                //only declared now to prevent scope clashing
+                DialogResult result;
+
+                //first, try to delete
+                foreach (EditableCity city in cities)
                 {
-                    result = MessageBox.Show("Are you sure you want to remove " + city.Name + ", " + city.Region + "?", "Are you sure?", MessageBoxButtons.YesNo);
-
-                    if (result == DialogResult.Yes)
+                    if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
+                       && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
                     {
-                        foreach (EditableCity c in cities)
-                        {
-                            c.RemoveCity(city);
-                        }
-                        cities.Remove(city);
-                    }
+                        result = MessageBox.Show("Are you sure you want to remove " + city.Name + ", " + city.Region + "?", "Are you sure?", MessageBoxButtons.YesNo);
 
-                    return;
+                        if (result == DialogResult.Yes)
+                        {
+                            foreach (EditableCity c in cities)
+                            {
+                                c.RemoveCity(city);
+                            }
+                            cities.Remove(city);
+                        }
+
+                        return;
+                    }
                 }
+
+                //then, try to create
+                CityNameEntryBox box = new CityNameEntryBox();
+                result = box.ShowDialog();
+
+                if (result == DialogResult.Cancel)
+                    return;
+
+                cities.Add(new EditableCity(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2(), cities));
             }
 
-            //then, try to create
-            CityNameEntryBox box = new CityNameEntryBox();
-            result = box.ShowDialog();
 
-            if (result == DialogResult.Cancel)
-                return;
-
-            cities.Add(new EditableCity(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2(), cities));
         }
+
+        
 
         //rotation code based on https://gamedev.stackexchange.com/a/44016
 
