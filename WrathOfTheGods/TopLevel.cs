@@ -61,35 +61,11 @@ namespace WrathOfTheGods
             mapScreen.CityTex = Content.Load<Texture2D>("basiccity");
             mapScreen.Path = Content.Load<Texture2D>("path");
 
-            //TODO: fucking XML import instead of this nonsense
-            List<City> cities = new List<City>();
-            cities.Add(new City("Corinth", "Corinthia", new Vector2(586, 820), cities));
-            cities.Add(new City("Megara", "Megaris", new Vector2(661, 785), cities));
-            cities.Add(new City("Athens", "Attica", new Vector2(735, 803), cities));
-            cities.Add(new City("Argos", "Argolis", new Vector2(563, 890), cities));
-            cities.Add(new City("Megalopolis", "Arcadia", new Vector2(437, 895), cities));
-            cities.Add(new City("Corinth", "Corinthia", new Vector2(533, 1017), cities));
-            City temp = cities[0];
-            temp.AddNeighbor(cities[1]);
-            temp.AddNeighbor(cities[3]);
-            temp.AddNeighbor(cities[4]);
-            temp = cities[1];
-            temp.AddNeighbor(cities[0]);
-            temp.AddNeighbor(cities[2]);
-            temp = cities[2];
-            temp.AddNeighbor(cities[1]);
-            temp = cities[3];
-            temp.AddNeighbor(cities[0]);
-            temp.AddNeighbor(cities[4]);
-            temp.AddNeighbor(cities[5]);
-            temp = cities[4];
-            temp.AddNeighbor(cities[3]);
-            temp.AddNeighbor(cities[0]);
-            temp.AddNeighbor(cities[5]);
-            temp = cities[5];
-            temp.AddNeighbor(cities[4]);
-            temp.AddNeighbor(cities[3]);
-
+            List<WrathOfTheGods.XMLLibrary.City> cities = Content.Load<List<WrathOfTheGods.XMLLibrary.City>>("cities");
+            foreach (WrathOfTheGods.XMLLibrary.City city in cities)
+            {
+                city.AddParent(cities);
+            }
             mapScreen.Cities = cities;
 
 

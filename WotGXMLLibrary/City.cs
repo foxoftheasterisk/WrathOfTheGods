@@ -67,9 +67,15 @@ namespace WrathOfTheGods.XMLLibrary
             return list;
         }
 
+        //probably unecessary!
         public List<int> GetNeighborIndices()
         {
             return new List<int>(neighbors);
+        }
+
+        public bool isNeighbor(City other)
+        {
+            return neighbors.Contains(cityList.IndexOf(other));
         }
 
         public void AddNeighbor(City neighbor)

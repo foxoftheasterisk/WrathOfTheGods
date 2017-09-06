@@ -1,41 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:Generic="System.Collections.Generic">
-  <Asset Type="Generic:List[WrathOfTheGods.City]">
+  <Asset Type="Generic:List[WrathOfTheGods.XMLLibrary.City]">
     <Item>
       <Name>Corinth</Name>
       <Region>Corinthia</Region>
-      <position>586 820</position>
-      <neighbors>1 3 4</neighbors>
-    </Item>
-    <Item>
-      <Name>Megara</Name>
-      <Region>Megaris</Region>
-      <position>661 785</position>
-      <neighbors>0 2</neighbors>
-    </Item>
-    <Item>
-      <Name>Athens</Name>
-      <Region>Attica</Region>
-      <position>735 803</position>
-      <neighbors>1</neighbors>
-    </Item>
-    <Item>
-      <Name>Argos</Name>
-      <Region>Argolis</Region>
-      <position>563 890</position>
-      <neighbors>0 4 5</neighbors>
-    </Item>
-    <Item>
-      <Name>Megalopolis</Name>
-      <Region>Arcadia</Region>
-      <position>437 895</position>
-      <neighbors>3 0 5</neighbors>
+      <position>578 812</position>
+      <neighbors>2 3</neighbors>
     </Item>
     <Item>
       <Name>Sparta</Name>
       <Region>Laconia</Region>
-      <position>533 1017</position>
-      <neighbors>4 3</neighbors>
+      <position>534 1015</position>
+      <neighbors>3 2</neighbors>
+    </Item>
+    <Item>
+      <Name>Argos</Name>
+      <Region>Argolis</Region>
+      <position>569 894</position>
+      <neighbors>1 0</neighbors>
+    </Item>
+    <Item>
+      <Name>Megalopolis</Name>
+      <Region>Arcadia</Region>
+      <position>449 897</position>
+      <neighbors>1 0</neighbors>
     </Item>
   </Asset>
 </XnaContent>

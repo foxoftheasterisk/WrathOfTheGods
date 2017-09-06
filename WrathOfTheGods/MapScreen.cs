@@ -14,6 +14,8 @@ using Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 
+using WrathOfTheGods.XMLLibrary;
+
 namespace WrathOfTheGods
 {
     class MapScreen : Screen
@@ -73,7 +75,7 @@ namespace WrathOfTheGods
                 drawer.Draw(CityTex, offset + city.Position * scale, null, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0.5f);
 
                 Vector2 home = (city.Position * scale) + offset + cityGate;
-                foreach(City neighbor in city.getNeighbors())
+                foreach(City neighbor in city.GetNeighbors())
                 {
                     //to prevent two paths drawing over each other, and to make sure paths draw in the direction that looks better
                     if(city.Position.X >= neighbor.Position.X)

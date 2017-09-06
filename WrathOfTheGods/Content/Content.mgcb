@@ -10,8 +10,7 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\bin\Android\AnyCPU\Debug\WrathOfTheGods.dll
-/reference:..\bin\Android\AnyCPU\Debug\MonoGame.Framework.dll
+/reference:..\bin\Android\AnyCPU\Debug\WotGXMLLibrary.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -50,4 +49,9 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:path.png
+
+#begin cities.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:cities.xml
 
