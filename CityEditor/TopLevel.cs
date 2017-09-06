@@ -56,19 +56,6 @@ namespace CityEditor
 
             editor.cities = Content.Load<WrathOfTheGods.XMLLibrary.SerializableList<WrathOfTheGods.XMLLibrary.City>>("cities");
 
-            /*
-            List<WrathOfTheGods.XMLLibrary.City> cities = Content.Load<List<WrathOfTheGods.XMLLibrary.City>>("cities");
-
-            //TODO: see if I can get rid of this
-            foreach (WrathOfTheGods.XMLLibrary.City city in cities)
-            {
-                city.AddParent(cities);
-            }
-
-            editor.cities = cities;
-            //*/
-            //what's the sitch
-
             graphics.PreferredBackBufferWidth = map.Width;
             int height = GraphicsDevice.DisplayMode.Height - 150;
             graphics.PreferredBackBufferHeight = height;
