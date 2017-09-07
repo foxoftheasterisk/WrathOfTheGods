@@ -18,7 +18,6 @@ namespace WrathOfTheGods.XMLLibrary
         { }
     }
 
-
     [ContentTypeSerializer]
     class ListSerializer<T> : ContentTypeSerializer<SerializableList<T>>
     {
@@ -50,6 +49,24 @@ namespace WrathOfTheGods.XMLLibrary
             while (input.MoveToElement(itemFormat.ElementName))
             {
                 input.ReadSharedResource(itemFormat, (T item) => existingInstance.Add(item));
+            }
+
+            return existingInstance;
+        }
+    }
+
+    public class SharedResourceListReader<T> : ContentTypeReader<SerializableList<T>>
+    {
+        protected override SerializableList<T> Read(ContentReader input, SerializableList<T> existingInstance)
+        {
+            if (existingInstance == null)
+                existingInstance = new SerializableList<T>();
+
+            int count = input.ReadInt32();
+
+            for (int i = 0; i < count; i++)
+            {
+                input.ReadSharedResource((T item) => existingInstance.Add(item));
             }
 
             return existingInstance;

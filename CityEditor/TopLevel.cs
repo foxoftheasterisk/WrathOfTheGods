@@ -59,16 +59,6 @@ namespace CityEditor
 
             editor.cities = Content.Load<XMLL.SerializableList<XMLL.City>>("citiesEditable");
 
-
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-
-            //bug check
-            using (XmlWriter writer = XmlWriter.Create("reflect.xml", settings))
-            {
-                IntermediateSerializer.Serialize<XMLL.SerializableList<XMLL.City>>(writer, editor.cities, null);
-            }
-
             graphics.PreferredBackBufferWidth = map.Width;
             int height = GraphicsDevice.DisplayMode.Height - 150;
             graphics.PreferredBackBufferHeight = height;

@@ -11,6 +11,7 @@
 #-------------------------------- References --------------------------------#
 
 /reference:..\bin\Android\AnyCPU\Debug\WotGXMLLibrary.dll
+/reference:..\..\WotgXMLExtension\bin\Debug\WotgXMLExtension.dll
 
 #---------------------------------- Content ---------------------------------#
 
