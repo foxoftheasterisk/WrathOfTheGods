@@ -166,9 +166,6 @@ namespace CityEditor
             }
 
 
-            }
-
-
         }
 
         

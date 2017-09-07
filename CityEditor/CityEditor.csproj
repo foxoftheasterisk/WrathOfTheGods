@@ -63,7 +63,6 @@
     <Compile Include="CityNameEntryBox.Designer.cs">
       <DependentUpon>CityNameEntryBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditableCity.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="TopLevel.cs" />
     <Compile Include="Program.cs" />
