@@ -62,15 +62,15 @@ namespace WrathOfTheGods
             mapScreen.Path = Content.Load<Texture2D>("path");
 
 <<<<<<< HEAD
+            mapScreen.Cities = Content.Load<XMLLibrary.SerializableList<XMLLibrary.City>>("cities");
+=======
             List<WrathOfTheGods.XMLLibrary.City> cities = Content.Load<List<WrathOfTheGods.XMLLibrary.City>>("cities");
             foreach (WrathOfTheGods.XMLLibrary.City city in cities)
             {
                 city.AddParent(cities);
             }
             mapScreen.Cities = cities;
-=======
-            mapScreen.Cities = Content.Load<XMLLibrary.SerializableList<XMLLibrary.City>>("cities");
->>>>>>> IncompatibleXML
+>>>>>>> master
 
 
         }

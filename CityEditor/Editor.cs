@@ -41,7 +41,7 @@ namespace CityEditor
 
 
         TopLevel.ClickType actionType = TopLevel.ClickType.None;
-        City activeCity = null;
+        EditableCity activeCity = null;
         Point lastMousePos;
 
         internal void Update(TopLevel.ClickType clickType, Point mouse, int scroll)
@@ -62,7 +62,7 @@ namespace CityEditor
                         break;
                     }
 
-                    foreach (City city in cities)
+                    foreach (EditableCity city in cities)
                     {
                         if(city.Position.X < mouse.X && city.Position.Y < mouse.Y
                            && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
@@ -71,13 +71,13 @@ namespace CityEditor
                             actionType = clickType;
                         }
                     }
-
                     break;
+
                 case TopLevel.ClickType.Right:
                     if (activeCity != null && actionType == TopLevel.ClickType.Right)
                         break;
 
-                    foreach (City city in cities)
+                    foreach (EditableCity city in cities)
                     {
                         if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
                            && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
@@ -86,12 +86,12 @@ namespace CityEditor
                             actionType = clickType;
                         }
                     }
-
                     break;
+
                 case TopLevel.ClickType.None:
                     if (activeCity != null && actionType == TopLevel.ClickType.Right)
                     {
-                        foreach (City city in cities)
+                        foreach (EditableCity city in cities)
                         {
                             if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
                                && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
@@ -166,6 +166,9 @@ namespace CityEditor
             }
 
 
+            }
+
+
         }
 
         
@@ -185,7 +188,7 @@ namespace CityEditor
                 spriteBatch.Draw(CityTex, city.Position + offset, null, Color.White, 0f, new Vector2(0), 1, SpriteEffects.None, 0.5f);
 
                 Vector2 home = city.Position + offset + cityGate;
-                foreach (City neighbor in city.GetNeighbors())
+                foreach (EditableCity neighbor in city.GetNeighbors())
                 {
                     Vector2 destination = neighbor.Position + offset + cityGate;
 

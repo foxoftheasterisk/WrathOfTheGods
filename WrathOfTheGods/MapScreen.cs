@@ -15,6 +15,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
 using WrathOfTheGods.XMLLibrary;
 
+using WrathOfTheGods.XMLLibrary;
+
 namespace WrathOfTheGods
 {
     class MapScreen : Screen

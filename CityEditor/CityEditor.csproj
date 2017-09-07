@@ -39,6 +39,7 @@
     <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -62,6 +63,7 @@
     <Compile Include="CityNameEntryBox.Designer.cs">
       <DependentUpon>CityNameEntryBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditableCity.cs" />
     <Compile Include="Editor.cs" />
     <Compile Include="TopLevel.cs" />
     <Compile Include="Program.cs" />

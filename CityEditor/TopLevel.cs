@@ -59,6 +59,7 @@ namespace CityEditor
 
             editor.cities = Content.Load<XMLL.SerializableList<XMLL.City>>("citiesEditable");
 
+
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
 

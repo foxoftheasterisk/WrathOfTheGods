@@ -93,10 +93,10 @@
   <ItemGroup>
     <ProjectReference Include="..\WotGXMLLibrary\WotGXMLLibrary.csproj">
 <<<<<<< HEAD
-      <Project>{e3e8c63f-4fec-4944-961b-77703569375d}</Project>
-=======
       <Project>{E3E8C63F-4FEC-4944-961B-77703569375D}</Project>
->>>>>>> IncompatibleXML
+=======
+      <Project>{e3e8c63f-4fec-4944-961b-77703569375d}</Project>
+>>>>>>> master
       <Name>WotGXMLLibrary</Name>
     </ProjectReference>
   </ItemGroup>
