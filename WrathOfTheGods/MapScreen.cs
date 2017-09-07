@@ -9,12 +9,12 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+
+
 using Microsoft.Xna.Framework.Graphics;
 using Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
-using WrathOfTheGods.XMLLibrary;
-
 using WrathOfTheGods.XMLLibrary;
 
 namespace WrathOfTheGods
@@ -62,7 +62,7 @@ namespace WrathOfTheGods
             bottomEdge = height - (Map.Height * scale);
         }
 
-        public void draw(SpriteBatch drawer)
+        public void Draw(SpriteBatch drawer)
         {
             //drawer.Draw(Map, offset, Color.White);
             drawer.Draw(Map, offset, null, Color.White, 0, new Vector2(0,0), scale, SpriteEffects.None, 0);
@@ -96,42 +96,36 @@ namespace WrathOfTheGods
             }
         }
 
-        public bool drawUnder()
+        public bool DrawUnder()
         {
             return false;
         }
 
-        public bool shouldClose()
+        public bool ShouldClose()
         {
             return false;
-            //TODO: maybe should close sometimes
-            //actually not sure, yet
+            //TODO: it's possible there are times it's not updating it should close
+            //like, if the player quicksaves from a battle or something
         }
 
 
         private Vector2 inertia = new Vector2(0,0);
         private bool touching;
-        public bool update(bool useInput)
+        public (bool updateBelow, bool shouldClose) Update(InputSet input)
         {
-            if(useInput)
+            GestureInput gesture = input.Consume(new GestureIdentifier(GestureType.FreeDrag)) as GestureInput;
+
+            if(gesture != null)
             {
+                inertia = gesture.Gesture.Delta;
+                touching = true;
+            }
 
-                while(TouchPanel.IsGestureAvailable)
-                {
-                    GestureSample gesture = TouchPanel.ReadGesture();
+            gesture = input.Consume(new GestureIdentifier(GestureType.DragComplete)) as GestureInput;
 
-                    switch(gesture.GestureType)
-                    {
-                        case GestureType.FreeDrag:
-                            inertia = gesture.Delta;
-                            touching = true;
-                            break;
-                        case GestureType.DragComplete:
-                            touching = false;
-                            break;
-                    }
-                }
-
+            if (gesture != null)
+            {
+                touching = false;
             }
 
             if (inertia.Length() != 0 && !float.IsNaN(inertia.X) && !float.IsNaN(inertia.Y))
@@ -174,7 +168,14 @@ namespace WrathOfTheGods
                     inertia.Y = EDGE_SPEED;
             }
 
-            return false;
+            return (false, false); 
+            //TODO: make returns actually do something.
+        }
+
+        public void Close()
+        {
+            //TODO: this
+            throw new NotImplementedException();
         }
     }
 }

@@ -37,7 +37,7 @@ namespace WrathOfTheGods
         protected override void Initialize()
         {
             mapScreen = new MapScreen();
-            ScreenManager.screenManager.push(mapScreen);
+            ScreenManager.screenManager.Push(mapScreen);
 
             TouchPanel.EnabledGestures = GestureType.FreeDrag | GestureType.DragComplete | GestureType.Pinch | GestureType.DoubleTap | GestureType.Hold;
 
@@ -85,8 +85,14 @@ namespace WrathOfTheGods
 
 
             //TODO: regulate timing probably
+            List<InputItem> input = new List<InputItem>();
 
-            ScreenManager.screenManager.update();
+            while (TouchPanel.IsGestureAvailable)
+            {
+                input.Add(new GestureInput(TouchPanel.ReadGesture()));
+            }
+
+            ScreenManager.screenManager.Update(new InputSet(input));
 
             base.Update(gameTime);
         }
@@ -99,7 +105,7 @@ namespace WrathOfTheGods
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            ScreenManager.screenManager.draw(spriteBatch, SpriteSortMode.FrontToBack, SamplerState.PointWrap);
+            ScreenManager.screenManager.Draw(spriteBatch, SpriteSortMode.FrontToBack, SamplerState.PointWrap);
 
             base.Draw(gameTime);
         }
