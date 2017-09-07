@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:XMLLibrary="WrathOfTheGods.XMLLibrary">
+  <Asset Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Item>#Resource1</Item>
+    <Item>#Resource2</Item>
+    <Item>#Resource3</Item>
+    <Item>#Resource4</Item>
+  </Asset>
+  <Resources>
+    <Resource ID="#Resource1" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+      <Name>Sparta</Name>
+      <Region>Laconia</Region>
+      <position>524 1019</position>
+      <neighbors>#Resource5</neighbors>
+    </Resource>
+    <Resource ID="#Resource2" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+      <Name>Argos</Name>
+      <Region>Argolis</Region>
+      <position>563 893</position>
+      <neighbors>#Resource6</neighbors>
+    </Resource>
+    <Resource ID="#Resource3" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+      <Name>Athens</Name>
+      <Region>Attica</Region>
+      <position>738 806</position>
+      <neighbors>#Resource7</neighbors>
+    </Resource>
+    <Resource ID="#Resource4" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+      <Name>Corinth</Name>
+      <Region>Corinthia</Region>
+      <position>575 817</position>
+      <neighbors>#Resource8</neighbors>
+    </Resource>
+    <Resource ID="#Resource5" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+      <Item>#Resource2</Item>
+    </Resource>
+    <Resource ID="#Resource6" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+      <Item>#Resource1</Item>
+      <Item>#Resource4</Item>
+    </Resource>
+    <Resource ID="#Resource7" Type="XMLLibrary:SerializableList[XMLLibrary:City]" />
+    <Resource ID="#Resource8" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+      <Item>#Resource2</Item>
+    </Resource>
+  </Resources>
+</XnaContent>

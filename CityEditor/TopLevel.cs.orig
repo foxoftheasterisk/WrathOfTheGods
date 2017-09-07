@@ -57,6 +57,9 @@ namespace CityEditor
             editor.Path = Content.Load<Texture2D>("path");
             editor.Font = Content.Load<SpriteFont>("somefont");
 
+<<<<<<< IncompatibleXML
+            editor.cities = Content.Load<WrathOfTheGods.XMLLibrary.SerializableList<WrathOfTheGods.XMLLibrary.City>>("cities");
+=======
             editor.cities = Content.Load<XMLL.SerializableList<XMLL.City>>("citiesEditable");
 
             XmlWriterSettings settings = new XmlWriterSettings();
@@ -67,6 +70,7 @@ namespace CityEditor
             {
                 IntermediateSerializer.Serialize<XMLL.SerializableList<XMLL.City>>(writer, editor.cities, null);
             }
+>>>>>>> local
 
             graphics.PreferredBackBufferWidth = map.Width;
             int height = GraphicsDevice.DisplayMode.Height - 150;
@@ -89,7 +93,7 @@ namespace CityEditor
         //double click handling code mostly copied from https://stackoverflow.com/questions/16111555/how-to-subscribe-to-double-clicks
 
         double ClickTimer = 0;
-        internal enum ClickType { Left, Double, Right, None}
+        internal enum ClickType { Left, Double, Right, Middle, None}
         bool clickHeld = false;
         int lastScroll = 0;
         /// <summary>
@@ -104,6 +108,11 @@ namespace CityEditor
                 XmlWriterSettings settings = new XmlWriterSettings();
                 settings.Indent = true;
 
+<<<<<<< IncompatibleXML
+                using (XmlWriter writer = XmlWriter.Create("cities.xml", settings))
+                {
+                    IntermediateSerializer.Serialize<List<WrathOfTheGods.XMLLibrary.City>>(writer, editor.cities, null);
+=======
                 //written as editable
                 using (XmlWriter writer = XmlWriter.Create("citiesEditable.xml", settings))
                 {
@@ -131,6 +140,7 @@ namespace CityEditor
                     //and it's fine
                     line = line.Replace("WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity", "XMLLibrary:City");
                     output.WriteLine(line);
+>>>>>>> local
                 }
 
                 input.Close();

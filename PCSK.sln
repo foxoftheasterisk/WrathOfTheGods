@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CityEditor", "CityEditor\Ci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WotGXMLLibrary", "WotGXMLLibrary\WotGXMLLibrary.csproj", "{E3E8C63F-4FEC-4944-961B-77703569375D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WotgXMLExtension", "WotgXMLExtension\WotgXMLExtension.csproj", "{CE427C76-66B6-4DF0-B09B-BA7244786550}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		ScreenManager\ScreenManager.projitems*{dc6d9569-2dd3-4737-9d6c-e8db9c77e328}*SharedItemsImports = 13
@@ -50,6 +52,14 @@ Global
 		{E3E8C63F-4FEC-4944-961B-77703569375D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E3E8C63F-4FEC-4944-961B-77703569375D}.Release|x86.ActiveCfg = Release|Any CPU
 		{E3E8C63F-4FEC-4944-961B-77703569375D}.Release|x86.Build.0 = Release|Any CPU
+		{CE427C76-66B6-4DF0-B09B-BA7244786550}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE427C76-66B6-4DF0-B09B-BA7244786550}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE427C76-66B6-4DF0-B09B-BA7244786550}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CE427C76-66B6-4DF0-B09B-BA7244786550}.Debug|x86.Build.0 = Debug|Any CPU
+		{CE427C76-66B6-4DF0-B09B-BA7244786550}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE427C76-66B6-4DF0-B09B-BA7244786550}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE427C76-66B6-4DF0-B09B-BA7244786550}.Release|x86.ActiveCfg = Release|Any CPU
+		{CE427C76-66B6-4DF0-B09B-BA7244786550}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

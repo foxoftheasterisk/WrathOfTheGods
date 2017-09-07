@@ -84,6 +84,7 @@
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="app.manifest" />
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +103,10 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WotgXMLExtension\WotgXMLExtension.csproj">
+      <Project>{ce427c76-66b6-4df0-b09b-ba7244786550}</Project>
+      <Name>WotgXMLExtension</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WotGXMLLibrary\WotGXMLLibrary.csproj">
       <Project>{e3e8c63f-4fec-4944-961b-77703569375d}</Project>
       <Name>WotGXMLLibrary</Name>
@@ -109,6 +114,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

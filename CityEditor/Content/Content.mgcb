@@ -10,7 +10,8 @@
 
 #-------------------------------- References --------------------------------#
 
-/reference:..\..\WotGXMLLibrary\bin\Debug\WotGXMLLibrary.dll
+/reference:..\bin\Windows\x86\Debug\WotGXMLLibrary.dll
+/reference:..\bin\Windows\x86\Debug\WotgXMLExtension.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -57,8 +58,8 @@
 /processorParam:TextureFormat=Color
 /build:path.png
 
-#begin cities.xml
+#begin citiesEditable.xml
 /importer:XmlImporter
 /processor:PassThroughProcessor
-/build:cities.xml
+/build:citiesEditable.xml
 

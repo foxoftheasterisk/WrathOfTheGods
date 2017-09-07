@@ -10,6 +10,9 @@ using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate;
 namespace WrathOfTheGods.XMLLibrary
 {
     public class SerializableList<T> : List<T>
+<<<<<<< IncompatibleXML
+    { }
+=======
     {
         public SerializableList() : base()
         { }
@@ -17,6 +20,7 @@ namespace WrathOfTheGods.XMLLibrary
         public SerializableList(SerializableList<T> cloneFrom) : base(cloneFrom)
         { }
     }
+>>>>>>> local
 
 
     [ContentTypeSerializer]

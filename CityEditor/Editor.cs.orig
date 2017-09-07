@@ -51,9 +51,16 @@ namespace CityEditor
             switch(clickType)
             {
                 case TopLevel.ClickType.Double:
-                    DoubleClickFunctions();
-                    break;
 
+                    CityNameEntryBox box = new CityNameEntryBox();
+                    DialogResult result = box.ShowDialog();
+
+                    if (result == DialogResult.Cancel)
+                        break;
+
+                    cities.Add(new City(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2()));
+
+                    break;
                 case TopLevel.ClickType.Left:
                     if(activeCity != null && actionType == TopLevel.ClickType.Left)
                     {
@@ -98,16 +105,8 @@ namespace CityEditor
                             {
                                 if(activeCity != city)
                                 {
-                                    if (activeCity.HasNeighbor(city))
-                                    {
-                                        city.RemoveNeighbor(activeCity);
-                                        activeCity.RemoveNeighbor(city);
-                                    }
-                                    else
-                                    {
-                                        city.AddNeighbor(activeCity);
-                                        activeCity.AddNeighbor(city);
-                                    }
+                                    city.AddNeighbor(activeCity);
+                                    activeCity.AddNeighbor(city);
                                 }
                             }
                         }
@@ -128,6 +127,8 @@ namespace CityEditor
             }
 
             lastMousePos = mouse;
+<<<<<<< IncompatibleXML
+=======
 
             void DoubleClickFunctions()
             {
@@ -166,9 +167,8 @@ namespace CityEditor
             }
 
 
+>>>>>>> local
         }
-
-        
 
         //rotation code based on https://gamedev.stackexchange.com/a/44016
 
@@ -180,7 +180,7 @@ namespace CityEditor
 
             spriteBatch.Draw(Map, offset, Color.White);
 
-            foreach(EditableCity city in cities)
+            foreach(City city in cities)
             {
                 spriteBatch.Draw(CityTex, city.Position + offset, null, Color.White, 0f, new Vector2(0), 1, SpriteEffects.None, 0.5f);
 

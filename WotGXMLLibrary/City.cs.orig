@@ -12,12 +12,12 @@ namespace WrathOfTheGods.XMLLibrary
     {
         [ContentSerializer]
         public string Name
-        { get; protected set; }
+        { get; private set; }
 
 
         [ContentSerializer]
         public string Region
-        { get; protected set; }
+        { get; private set; }
 
 
         public Vector2 Position
@@ -26,16 +26,16 @@ namespace WrathOfTheGods.XMLLibrary
             {
                 return new Vector2(position.X, position.Y);
             }
-            protected set
-            {
-                position = value;
-            }
         }
         [ContentSerializer]
-        protected Vector2 position;
+        private Vector2 position;
 
         [ContentSerializer(SharedResource = true)]
+<<<<<<< IncompatibleXML
+        private SerializableList<City> neighbors;
+=======
         protected SerializableList<City> neighbors;
+>>>>>>> local
 
         //public Vector2 spriteVector
         //TODO: draw individual sprites
@@ -45,6 +45,9 @@ namespace WrathOfTheGods.XMLLibrary
             neighbors = new SerializableList<City>();
         }
 
+<<<<<<< IncompatibleXML
+        public City(string name, string region, Vector2 _position)
+=======
         //I want this to be protected, but if it is then EditableCity can't actually call it :/
         public City(City city)
         {
@@ -55,26 +58,48 @@ namespace WrathOfTheGods.XMLLibrary
         }
 
         protected City(string name, string region, Vector2 _position)
+>>>>>>> local
         {
             Name = name;
             Region = region;
             position = _position;
             neighbors = new SerializableList<City>();
+<<<<<<< IncompatibleXML
         }
 
         public List<City> GetNeighbors()
         {
+            return new List<City>(neighbors);
+=======
+>>>>>>> local
+        }
+
+        public void AddNeighbor(City neighbor)
+        {
+<<<<<<< IncompatibleXML
+            neighbors.Add(neighbor);
+        }
+
+        public void RemoveNeighbor(City neighbor)
+        {
+            neighbors.Remove(neighbor);
+=======
             return new List<City>(neighbors);
         }
 
         private SerializableList<City> GetNeighborsSerializable()
         {
             return new SerializableList<City>(neighbors);
+>>>>>>> local
         }
 
-        public bool HasNeighbor(City other)
+        public void Move(Vector2 vector)
         {
+<<<<<<< IncompatibleXML
+            position += vector;
+=======
             return neighbors.Contains(other);
+>>>>>>> local
         }
     }
 }
