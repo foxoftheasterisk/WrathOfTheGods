@@ -54,12 +54,12 @@ namespace WrathOfTheGods
             if(activeHero != null)
             {
 
-                GestureInput gi = input.Consume(new GestureIdentifier(GestureType.FreeDrag)) as GestureInput;
-
                 //null indicates lost focus - another screen jacked the FreeDrag gesture.
                 //in this case, we want to stop dragging
-                if (gi != null)
+                if (input.Consume(out InputItem ii, new GestureIdentifier(GestureType.FreeDrag)))
                 {
+                    GestureInput gi = (GestureInput)ii;
+
                     activeHeroDelta += gi.Gesture.Delta;
                     lastScreenPoint = gi.Gesture.Position;
                 }
@@ -75,11 +75,9 @@ namespace WrathOfTheGods
             }
             else
             {
-                GestureInput gi = input.Consume(new GestureOnHero(GestureType.FreeDrag, new Func<Vector2, Hero>(GetHeroAtScreenPoint))) as GestureInput;
-
-                if(gi != null)
+                if(input.Consume(out InputItem ii, new GestureOnHero(GestureType.FreeDrag, new Func<Vector2, Hero>(GetHeroAtScreenPoint))))
                 {
-                    activeHero = GetHeroAtScreenPoint(gi.Gesture.Position);
+                    activeHero = GetHeroAtScreenPoint(((GestureInput)ii).Gesture.Position);
                     activeHeroDelta = new Vector2(0);
                 }
             }

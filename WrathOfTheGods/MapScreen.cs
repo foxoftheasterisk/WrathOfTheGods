@@ -166,14 +166,9 @@ namespace WrathOfTheGods
                 if (input.IsEmpty())
                     touching = false;
 
-                GestureInput gesture = input.Consume(new GestureIdentifier(GestureType.FreeDrag)) as GestureInput;
 
-                if (gesture != null)
-                    inertia = gesture.Gesture.Delta;
-
-                gesture = input.Consume(new GestureIdentifier(GestureType.DragComplete)) as GestureInput;
-                if (gesture != null)
-                    touching = false;
+                if (input.Consume(out InputItem ii, new GestureIdentifier(GestureType.FreeDrag)))
+                    inertia = ((GestureInput)ii).Gesture.Delta;
                 
             }
 
@@ -181,11 +176,9 @@ namespace WrathOfTheGods
 
             if(!touching)
             {
-                GestureInput gesture = input.Consume(new GestureIdentifier(GestureType.FreeDrag)) as GestureInput;
-
-                if (gesture != null)
+                if (input.Consume(out InputItem ii, new GestureIdentifier(GestureType.FreeDrag)))
                 {
-                    inertia = gesture.Gesture.Delta;
+                    inertia = ((GestureInput)ii).Gesture.Delta;
                     touching = true;
                 }
             }
