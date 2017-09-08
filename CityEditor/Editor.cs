@@ -25,14 +25,14 @@ namespace CityEditor
         public SpriteFont Font
         { set; private get; }
 
-        public SerializableList<City> cities;
+        public SerializableList<CityData> cities;
 
         private const int citySize = 30;
         private Vector2 cityGate = new Vector2(citySize / 2, citySize);
 
         public Editor()
         {
-            cities = new SerializableList<City>();
+            cities = new SerializableList<CityData>();
         }
 
         private int vertOffset;
@@ -41,7 +41,7 @@ namespace CityEditor
 
 
         TopLevel.ClickType actionType = TopLevel.ClickType.None;
-        EditableCity activeCity = null;
+        EditableCityData activeCity = null;
         Point lastMousePos;
 
         internal void Update(TopLevel.ClickType clickType, Point mouse, int scroll)
@@ -62,7 +62,7 @@ namespace CityEditor
                         break;
                     }
 
-                    foreach (EditableCity city in cities)
+                    foreach (EditableCityData city in cities)
                     {
                         if(city.Position.X < mouse.X && city.Position.Y < mouse.Y
                            && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
@@ -77,7 +77,7 @@ namespace CityEditor
                     if (activeCity != null && actionType == TopLevel.ClickType.Right)
                         break;
 
-                    foreach (EditableCity city in cities)
+                    foreach (EditableCityData city in cities)
                     {
                         if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
                            && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
@@ -91,7 +91,7 @@ namespace CityEditor
                 case TopLevel.ClickType.None:
                     if (activeCity != null && actionType == TopLevel.ClickType.Right)
                     {
-                        foreach (EditableCity city in cities)
+                        foreach (EditableCityData city in cities)
                         {
                             if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
                                && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
@@ -135,16 +135,16 @@ namespace CityEditor
                 DialogResult result;
 
                 //first, try to delete
-                foreach (EditableCity city in cities)
+                foreach (EditableCityData city in cities)
                 {
                     if (city.Position.X < mouse.X && city.Position.Y < mouse.Y
                        && city.Position.X + citySize > mouse.X && city.Position.Y + citySize > mouse.Y)
                     {
-                        result = MessageBox.Show("Are you sure you want to remove " + city.Name + ", " + city.Region + "?", "Are you sure?", MessageBoxButtons.YesNo);
+                        result = MessageBox.Show($"Are you sure you want to remove {city.Name}, {city.Region}?", "Are you sure?", MessageBoxButtons.YesNo);
 
                         if (result == DialogResult.Yes)
                         {
-                            foreach (EditableCity c in cities)
+                            foreach (EditableCityData c in cities)
                             {
                                 c.RemoveNeighbor(city);
                             }
@@ -162,7 +162,7 @@ namespace CityEditor
                 if (result == DialogResult.Cancel)
                     return;
 
-                cities.Add(new EditableCity(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2()));
+                cities.Add(new EditableCityData(box.CityNameBox.Text, box.RegionNameBox.Text, mouse.ToVector2()));
             }
 
 
@@ -180,12 +180,12 @@ namespace CityEditor
 
             spriteBatch.Draw(Map, offset, Color.White);
 
-            foreach(EditableCity city in cities)
+            foreach(EditableCityData city in cities)
             {
                 spriteBatch.Draw(CityTex, city.Position + offset, null, Color.White, 0f, new Vector2(0), 1, SpriteEffects.None, 0.5f);
 
                 Vector2 home = city.Position + offset + cityGate;
-                foreach (EditableCity neighbor in city.GetNeighbors())
+                foreach (EditableCityData neighbor in city.GetNeighbors())
                 {
                     Vector2 destination = neighbor.Position + offset + cityGate;
 

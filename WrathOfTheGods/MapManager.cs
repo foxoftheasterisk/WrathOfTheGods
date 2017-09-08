@@ -10,7 +10,6 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-using WrathOfTheGods.XMLLibrary;
 using Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input.Touch;
@@ -24,14 +23,14 @@ namespace WrathOfTheGods
         private static Vector2 HeroSize = MapScreen.HeroTexSize;
         private static Vector2 HeroOffset = MapScreen.HeroOffset / MapScreen.Scale;
 
-        public SerializableList<City> Cities
+        public List<City> Cities
         { get; private set; }
         
 
         public List<Hero> Heroes
         { get; private set; }
 
-        public MapManager(SerializableList<City> cities, Func<Vector2, Vector2> convertToLogical)
+        public MapManager(List<City> cities, Func<Vector2, Vector2> convertToLogical)
         {
             Cities = cities;
 

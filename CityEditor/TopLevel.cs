@@ -57,7 +57,7 @@ namespace CityEditor
             editor.Path = Content.Load<Texture2D>("path");
             editor.Font = Content.Load<SpriteFont>("somefont");
 
-            editor.cities = Content.Load<XMLL.SerializableList<XMLL.City>>("citiesEditable");
+            editor.cities = Content.Load<XMLL.SerializableList<XMLL.CityData>>("citiesEditable");
 
             graphics.PreferredBackBufferWidth = map.Width;
             int height = GraphicsDevice.DisplayMode.Height - 150;
@@ -98,7 +98,7 @@ namespace CityEditor
                 //written as editable
                 using (XmlWriter writer = XmlWriter.Create("citiesEditable.xml", settings))
                 {
-                    IntermediateSerializer.Serialize<XMLL.SerializableList<XMLL.City>>(writer, editor.cities, null);
+                    IntermediateSerializer.Serialize<XMLL.SerializableList<XMLL.CityData>>(writer, editor.cities, null);
                 }
 
                 

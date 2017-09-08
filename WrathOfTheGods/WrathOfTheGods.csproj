@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
+    <Compile Include="City.cs" />
+    <Compile Include="Faction.cs" />
     <Compile Include="GestureInput.cs" />
     <Compile Include="Hero.cs" />
     <Compile Include="MapManager.cs" />

@@ -60,7 +60,15 @@ namespace WrathOfTheGods
 
             mapScreen.SetScreenSize(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
-            mapScreen.SetCities(Content.Load<XMLLibrary.SerializableList<XMLLibrary.City>>("cities"));
+            XMLLibrary.SerializableList<XMLLibrary.CityData> cityData = Content.Load<XMLLibrary.SerializableList<XMLLibrary.CityData>>("cities");
+            List<City> cities = new List<City>();
+
+            foreach(XMLLibrary.CityData citydatum in cityData)
+            {
+                cities.Add(new City(citydatum));
+            }
+
+            mapScreen.SetCities(cities);
 
 
         }

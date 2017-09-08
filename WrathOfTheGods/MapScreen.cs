@@ -71,7 +71,7 @@ namespace WrathOfTheGods
             bottomEdge = height - (Map.Height * Scale);
         }
 
-        public void SetCities(SerializableList<City> cities)
+        public void SetCities(List<City> cities)
         {
             mapManager = new MapManager(cities, new Func<Vector2, Vector2>(ConvertToLogicalSpace));
         }

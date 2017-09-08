@@ -9,28 +9,28 @@ using Microsoft.Xna.Framework;
 namespace WrathOfTheGods.XMLLibrary.EditingExtension
 {
 
-    public class EditableCity : City
+    public class EditableCityData : CityData
     {
-        public EditableCity() : base()
+        public EditableCityData() : base()
         { }
 
-        public EditableCity(City city) : base(city)
+        public EditableCityData(CityData city) : base(city)
         { }
 
-        public EditableCity(string name, string region, Vector2 _position) : base (name, region, _position)
+        public EditableCityData(string name, string region, Vector2 _position) : base (name, region, _position)
         { }
 
-        public City Base()
+        public CityData Base()
         {
-            return new City(this);
+            return new CityData(this);
         }
 
-        public void AddNeighbor(City neighbor)
+        public void AddNeighbor(CityData neighbor)
         {
             neighbors.Add(neighbor);
         }
 
-        public void RemoveNeighbor(City neighbor)
+        public void RemoveNeighbor(CityData neighbor)
         {
             neighbors.Remove(neighbor);
         }

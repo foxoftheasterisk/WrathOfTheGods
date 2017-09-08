@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:XMLLibrary="WrathOfTheGods.XMLLibrary">
-  <Asset Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+  <Asset Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
     <Item>#Resource1</Item>
     <Item>#Resource2</Item>
     <Item>#Resource3</Item>
@@ -48,351 +48,351 @@
     <Item>#Resource45</Item>
   </Asset>
   <Resources>
-    <Resource ID="#Resource1" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource1" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Sparta</Name>
       <Region>Laconia</Region>
       <position>524 1016</position>
       <neighbors>#Resource46</neighbors>
     </Resource>
-    <Resource ID="#Resource2" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource2" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Argos</Name>
       <Region>Argolis</Region>
       <position>566 888</position>
       <neighbors>#Resource47</neighbors>
     </Resource>
-    <Resource ID="#Resource3" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource3" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Athens</Name>
       <Region>Attica</Region>
       <position>738 806</position>
       <neighbors>#Resource48</neighbors>
     </Resource>
-    <Resource ID="#Resource4" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource4" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Corinth</Name>
       <Region>Corinthia</Region>
       <position>577 820</position>
       <neighbors>#Resource49</neighbors>
     </Resource>
-    <Resource ID="#Resource5" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource5" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Megara</Name>
       <Region>Megaris</Region>
       <position>675 798</position>
       <neighbors>#Resource50</neighbors>
     </Resource>
-    <Resource ID="#Resource6" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource6" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Patras</Name>
       <Region>Athaea</Region>
       <position>402 751</position>
       <neighbors>#Resource51</neighbors>
     </Resource>
-    <Resource ID="#Resource7" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource7" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Megalopolis</Name>
       <Region>Arcadia</Region>
       <position>435 915</position>
       <neighbors>#Resource52</neighbors>
     </Resource>
-    <Resource ID="#Resource8" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource8" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Pylos</Name>
       <Region>Messenia</Region>
       <position>389 1028</position>
       <neighbors>#Resource53</neighbors>
     </Resource>
-    <Resource ID="#Resource9" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource9" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Olympia</Name>
       <Region>Elis</Region>
       <position>370 888</position>
       <neighbors>#Resource54</neighbors>
     </Resource>
-    <Resource ID="#Resource10" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource10" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Eretria</Name>
       <Region>Euboea</Region>
       <position>756 703</position>
       <neighbors>#Resource55</neighbors>
     </Resource>
-    <Resource ID="#Resource11" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource11" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Thebes</Name>
       <Region>Boeotia</Region>
       <position>673 735</position>
       <neighbors>#Resource56</neighbors>
     </Resource>
-    <Resource ID="#Resource12" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource12" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Delphi</Name>
       <Region>Phocis</Region>
       <position>540 704</position>
       <neighbors>#Resource57</neighbors>
     </Resource>
-    <Resource ID="#Resource13" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource13" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Amfissa</Name>
       <Region>Locris</Region>
       <position>503 692</position>
       <neighbors>#Resource58</neighbors>
     </Resource>
-    <Resource ID="#Resource14" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource14" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Calydon</Name>
       <Region>Aetolia</Region>
       <position>377 689</position>
       <neighbors>#Resource59</neighbors>
     </Resource>
-    <Resource ID="#Resource15" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource15" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Lefkada</Name>
       <Region>Acarnania</Region>
       <position>202 642</position>
       <neighbors>#Resource60</neighbors>
     </Resource>
-    <Resource ID="#Resource16" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource16" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Erineum</Name>
       <Region>Doris</Region>
       <position>511 654</position>
       <neighbors>#Resource61</neighbors>
     </Resource>
-    <Resource ID="#Resource17" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource17" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Trachis</Name>
       <Region>Malis</Region>
       <position>531 612</position>
       <neighbors>#Resource62</neighbors>
     </Resource>
-    <Resource ID="#Resource18" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource18" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Pherae</Name>
       <Region>Phthiotis</Region>
       <position>585 533</position>
       <neighbors>#Resource63</neighbors>
     </Resource>
-    <Resource ID="#Resource19" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource19" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Hypata</Name>
       <Region>Ainis</Region>
       <position>467 600</position>
       <neighbors>#Resource64</neighbors>
     </Resource>
-    <Resource ID="#Resource20" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource20" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Iolcus</Name>
       <Region>Magnesia</Region>
       <position>613 487</position>
       <neighbors>#Resource65</neighbors>
     </Resource>
-    <Resource ID="#Resource21" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource21" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Larisa</Name>
       <Region>Pelasgiotis</Region>
       <position>512 435</position>
       <neighbors>#Resource66</neighbors>
     </Resource>
-    <Resource ID="#Resource22" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource22" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Pharsalos</Name>
       <Region>Thessaliotis</Region>
       <position>499 522</position>
       <neighbors>#Resource67</neighbors>
     </Resource>
-    <Resource ID="#Resource23" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource23" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Dolopeis</Name>
       <Region>Dolopia</Region>
       <position>420 556</position>
       <neighbors>#Resource68</neighbors>
     </Resource>
-    <Resource ID="#Resource24" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource24" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Argithea</Name>
       <Region>Athamania</Region>
       <position>292 504</position>
       <neighbors>#Resource69</neighbors>
     </Resource>
-    <Resource ID="#Resource25" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource25" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Ephyra</Name>
       <Region>Thesprotia</Region>
       <position>188 504</position>
       <neighbors>#Resource70</neighbors>
     </Resource>
-    <Resource ID="#Resource26" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource26" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Dodona</Name>
       <Region>Molossis</Region>
       <position>215 446</position>
       <neighbors>#Resource71</neighbors>
     </Resource>
-    <Resource ID="#Resource27" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource27" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Phoenike</Name>
       <Region>Chaonia</Region>
       <position>99 382</position>
       <neighbors>#Resource72</neighbors>
     </Resource>
-    <Resource ID="#Resource28" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource28" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Antigonea</Name>
       <Region>Parauaea</Region>
       <position>112 291</position>
       <neighbors>#Resource73</neighbors>
     </Resource>
-    <Resource ID="#Resource29" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource29" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Trikka</Name>
       <Region>Histiaeotis</Region>
       <position>410 454</position>
       <neighbors>#Resource74</neighbors>
     </Resource>
-    <Resource ID="#Resource30" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource30" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Phalanna</Name>
       <Region>Perrhabia</Region>
       <position>466 361</position>
       <neighbors>#Resource75</neighbors>
     </Resource>
-    <Resource ID="#Resource31" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource31" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Aiani</Name>
       <Region>Elimeia</Region>
       <position>411 311</position>
       <neighbors>#Resource76</neighbors>
     </Resource>
-    <Resource ID="#Resource32" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource32" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Pydna</Name>
       <Region>Olympos</Region>
       <position>542 271</position>
       <neighbors>#Resource77</neighbors>
     </Resource>
-    <Resource ID="#Resource33" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource33" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Argos Orestikon</Name>
       <Region>Orestis</Region>
       <position>298 248</position>
       <neighbors>#Resource78</neighbors>
     </Resource>
-    <Resource ID="#Resource34" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource34" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Styberra</Name>
       <Region>Lynkestis</Region>
       <position>323 112</position>
       <neighbors>#Resource79</neighbors>
     </Resource>
-    <Resource ID="#Resource35" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource35" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Eordaea</Name>
       <Region>Eordaia</Region>
       <position>383 222</position>
       <neighbors>#Resource80</neighbors>
     </Resource>
-    <Resource ID="#Resource36" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource36" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Edessa</Name>
       <Region>Almopia</Region>
       <position>451 160</position>
       <neighbors>#Resource81</neighbors>
     </Resource>
-    <Resource ID="#Resource37" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource37" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Aigai</Name>
       <Region>Bottia</Region>
       <position>500 231</position>
       <neighbors>#Resource82</neighbors>
     </Resource>
-    <Resource ID="#Resource38" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource38" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Therma</Name>
       <Region>Mygdonia</Region>
       <position>610 199</position>
       <neighbors>#Resource83</neighbors>
     </Resource>
-    <Resource ID="#Resource39" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource39" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Toroni</Name>
       <Region>Chalkidike</Region>
       <position>775 343</position>
       <neighbors>#Resource84</neighbors>
     </Resource>
-    <Resource ID="#Resource40" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource40" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Aphipolis</Name>
       <Region>Edonis</Region>
       <position>783 153</position>
       <neighbors>#Resource85</neighbors>
     </Resource>
-    <Resource ID="#Resource41" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource41" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Argilus</Name>
       <Region>Bisaltia</Region>
       <position>750 165</position>
       <neighbors>#Resource86</neighbors>
     </Resource>
-    <Resource ID="#Resource42" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource42" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Olympos</Name>
       <Region></Region>
       <position>514 330</position>
       <neighbors>#Resource87</neighbors>
     </Resource>
-    <Resource ID="#Resource43" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource43" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Creston</Name>
       <Region>Crestonia</Region>
       <position>574 126</position>
       <neighbors>#Resource88</neighbors>
     </Resource>
-    <Resource ID="#Resource44" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource44" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Sirra</Name>
       <Region>Odomantike</Region>
       <position>725 83</position>
       <neighbors>#Resource89</neighbors>
     </Resource>
-    <Resource ID="#Resource45" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity">
+    <Resource ID="#Resource45" Type="WrathOfTheGods.XMLLibrary.EditingExtension.EditableCityData">
       <Name>Heraclea</Name>
       <Region>Sintike</Region>
       <position>667 58</position>
       <neighbors>#Resource90</neighbors>
     </Resource>
-    <Resource ID="#Resource46" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource46" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource2</Item>
       <Item>#Resource7</Item>
       <Item>#Resource8</Item>
     </Resource>
-    <Resource ID="#Resource47" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource47" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource1</Item>
       <Item>#Resource4</Item>
       <Item>#Resource7</Item>
     </Resource>
-    <Resource ID="#Resource48" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource48" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource5</Item>
       <Item>#Resource10</Item>
       <Item>#Resource11</Item>
     </Resource>
-    <Resource ID="#Resource49" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource49" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource2</Item>
       <Item>#Resource5</Item>
       <Item>#Resource6</Item>
     </Resource>
-    <Resource ID="#Resource50" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource50" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource4</Item>
       <Item>#Resource3</Item>
       <Item>#Resource11</Item>
     </Resource>
-    <Resource ID="#Resource51" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource51" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource4</Item>
       <Item>#Resource7</Item>
       <Item>#Resource9</Item>
       <Item>#Resource13</Item>
       <Item>#Resource14</Item>
     </Resource>
-    <Resource ID="#Resource52" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource52" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource6</Item>
       <Item>#Resource2</Item>
       <Item>#Resource1</Item>
       <Item>#Resource8</Item>
       <Item>#Resource9</Item>
     </Resource>
-    <Resource ID="#Resource53" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource53" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource1</Item>
       <Item>#Resource7</Item>
       <Item>#Resource9</Item>
       <Item>#Resource15</Item>
     </Resource>
-    <Resource ID="#Resource54" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource54" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource6</Item>
       <Item>#Resource7</Item>
       <Item>#Resource8</Item>
     </Resource>
-    <Resource ID="#Resource55" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource55" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource3</Item>
       <Item>#Resource11</Item>
       <Item>#Resource17</Item>
       <Item>#Resource20</Item>
     </Resource>
-    <Resource ID="#Resource56" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource56" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource5</Item>
       <Item>#Resource3</Item>
       <Item>#Resource10</Item>
       <Item>#Resource12</Item>
     </Resource>
-    <Resource ID="#Resource57" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource57" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource11</Item>
       <Item>#Resource13</Item>
       <Item>#Resource16</Item>
       <Item>#Resource17</Item>
     </Resource>
-    <Resource ID="#Resource58" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource58" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource12</Item>
       <Item>#Resource6</Item>
       <Item>#Resource14</Item>
       <Item>#Resource16</Item>
     </Resource>
-    <Resource ID="#Resource59" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource59" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource6</Item>
       <Item>#Resource13</Item>
       <Item>#Resource15</Item>
@@ -401,19 +401,19 @@
       <Item>#Resource23</Item>
       <Item>#Resource24</Item>
     </Resource>
-    <Resource ID="#Resource60" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource60" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource14</Item>
       <Item>#Resource8</Item>
       <Item>#Resource24</Item>
       <Item>#Resource27</Item>
     </Resource>
-    <Resource ID="#Resource61" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource61" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource13</Item>
       <Item>#Resource12</Item>
       <Item>#Resource17</Item>
       <Item>#Resource14</Item>
     </Resource>
-    <Resource ID="#Resource62" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource62" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource16</Item>
       <Item>#Resource12</Item>
       <Item>#Resource10</Item>
@@ -421,24 +421,24 @@
       <Item>#Resource19</Item>
       <Item>#Resource22</Item>
     </Resource>
-    <Resource ID="#Resource63" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource63" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource17</Item>
       <Item>#Resource21</Item>
       <Item>#Resource22</Item>
     </Resource>
-    <Resource ID="#Resource64" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource64" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource17</Item>
       <Item>#Resource14</Item>
       <Item>#Resource22</Item>
       <Item>#Resource23</Item>
     </Resource>
-    <Resource ID="#Resource65" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource65" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource10</Item>
       <Item>#Resource21</Item>
       <Item>#Resource32</Item>
       <Item>#Resource39</Item>
     </Resource>
-    <Resource ID="#Resource66" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource66" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource20</Item>
       <Item>#Resource18</Item>
       <Item>#Resource22</Item>
@@ -446,7 +446,7 @@
       <Item>#Resource30</Item>
       <Item>#Resource32</Item>
     </Resource>
-    <Resource ID="#Resource67" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource67" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource21</Item>
       <Item>#Resource18</Item>
       <Item>#Resource17</Item>
@@ -454,14 +454,14 @@
       <Item>#Resource23</Item>
       <Item>#Resource29</Item>
     </Resource>
-    <Resource ID="#Resource68" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource68" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource19</Item>
       <Item>#Resource14</Item>
       <Item>#Resource22</Item>
       <Item>#Resource24</Item>
       <Item>#Resource29</Item>
     </Resource>
-    <Resource ID="#Resource69" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource69" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource15</Item>
       <Item>#Resource23</Item>
       <Item>#Resource14</Item>
@@ -470,11 +470,11 @@
       <Item>#Resource29</Item>
       <Item>#Resource30</Item>
     </Resource>
-    <Resource ID="#Resource70" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource70" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource24</Item>
       <Item>#Resource26</Item>
     </Resource>
-    <Resource ID="#Resource71" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource71" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource25</Item>
       <Item>#Resource24</Item>
       <Item>#Resource27</Item>
@@ -483,24 +483,24 @@
       <Item>#Resource31</Item>
       <Item>#Resource33</Item>
     </Resource>
-    <Resource ID="#Resource72" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource72" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource26</Item>
       <Item>#Resource15</Item>
       <Item>#Resource28</Item>
     </Resource>
-    <Resource ID="#Resource73" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource73" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource27</Item>
       <Item>#Resource26</Item>
       <Item>#Resource33</Item>
     </Resource>
-    <Resource ID="#Resource74" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource74" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource21</Item>
       <Item>#Resource22</Item>
       <Item>#Resource23</Item>
       <Item>#Resource24</Item>
       <Item>#Resource30</Item>
     </Resource>
-    <Resource ID="#Resource75" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource75" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource21</Item>
       <Item>#Resource29</Item>
       <Item>#Resource26</Item>
@@ -508,14 +508,14 @@
       <Item>#Resource31</Item>
       <Item>#Resource32</Item>
     </Resource>
-    <Resource ID="#Resource76" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource76" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource30</Item>
       <Item>#Resource26</Item>
       <Item>#Resource32</Item>
       <Item>#Resource33</Item>
       <Item>#Resource35</Item>
     </Resource>
-    <Resource ID="#Resource77" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource77" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource30</Item>
       <Item>#Resource31</Item>
       <Item>#Resource21</Item>
@@ -526,19 +526,19 @@
       <Item>#Resource39</Item>
       <Item>#Resource42</Item>
     </Resource>
-    <Resource ID="#Resource78" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource78" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource31</Item>
       <Item>#Resource26</Item>
       <Item>#Resource28</Item>
       <Item>#Resource34</Item>
       <Item>#Resource35</Item>
     </Resource>
-    <Resource ID="#Resource79" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource79" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource33</Item>
       <Item>#Resource35</Item>
       <Item>#Resource36</Item>
     </Resource>
-    <Resource ID="#Resource80" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource80" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource34</Item>
       <Item>#Resource33</Item>
       <Item>#Resource31</Item>
@@ -546,37 +546,37 @@
       <Item>#Resource36</Item>
       <Item>#Resource37</Item>
     </Resource>
-    <Resource ID="#Resource81" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource81" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource34</Item>
       <Item>#Resource35</Item>
       <Item>#Resource37</Item>
       <Item>#Resource43</Item>
     </Resource>
-    <Resource ID="#Resource82" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource82" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource36</Item>
       <Item>#Resource35</Item>
       <Item>#Resource32</Item>
       <Item>#Resource38</Item>
       <Item>#Resource43</Item>
     </Resource>
-    <Resource ID="#Resource83" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource83" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource32</Item>
       <Item>#Resource37</Item>
       <Item>#Resource39</Item>
       <Item>#Resource41</Item>
       <Item>#Resource43</Item>
     </Resource>
-    <Resource ID="#Resource84" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource84" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource38</Item>
       <Item>#Resource20</Item>
       <Item>#Resource41</Item>
       <Item>#Resource32</Item>
     </Resource>
-    <Resource ID="#Resource85" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource85" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource41</Item>
       <Item>#Resource44</Item>
     </Resource>
-    <Resource ID="#Resource86" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource86" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource40</Item>
       <Item>#Resource38</Item>
       <Item>#Resource39</Item>
@@ -584,22 +584,22 @@
       <Item>#Resource44</Item>
       <Item>#Resource45</Item>
     </Resource>
-    <Resource ID="#Resource87" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource87" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource32</Item>
     </Resource>
-    <Resource ID="#Resource88" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource88" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource36</Item>
       <Item>#Resource37</Item>
       <Item>#Resource38</Item>
       <Item>#Resource41</Item>
       <Item>#Resource45</Item>
     </Resource>
-    <Resource ID="#Resource89" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource89" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource40</Item>
       <Item>#Resource41</Item>
       <Item>#Resource45</Item>
     </Resource>
-    <Resource ID="#Resource90" Type="XMLLibrary:SerializableList[XMLLibrary:City]">
+    <Resource ID="#Resource90" Type="XMLLibrary:SerializableList[XMLLibrary:CityData]">
       <Item>#Resource44</Item>
       <Item>#Resource41</Item>
       <Item>#Resource43</Item>
