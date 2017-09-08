@@ -18,7 +18,7 @@ namespace WrathOfTheGods
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            var g = new TopLevel();
+            TopLevel g = new TopLevel();
             SetContentView((View)g.Services.GetService(typeof(View)));
             g.Run();
         }

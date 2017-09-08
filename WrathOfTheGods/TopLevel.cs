@@ -39,7 +39,7 @@ namespace WrathOfTheGods
             mapScreen = new MapScreen();
             ScreenManager.screenManager.Push(mapScreen);
 
-            TouchPanel.EnabledGestures = GestureType.FreeDrag | GestureType.DragComplete | GestureType.Pinch | GestureType.DoubleTap | GestureType.Hold;
+            TouchPanel.EnabledGestures = GestureType.FreeDrag | GestureType.Pinch | GestureType.DoubleTap | GestureType.Hold;
 
             base.Initialize();
         }
@@ -53,15 +53,14 @@ namespace WrathOfTheGods
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            Texture2D greece;
-            greece = Content.Load<Texture2D>("greece");
-            mapScreen.Map = greece;
-            mapScreen.SetScreenSize(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-
+            mapScreen.Map = Content.Load<Texture2D>("greece");
             mapScreen.CityTex = Content.Load<Texture2D>("basiccity");
             mapScreen.Path = Content.Load<Texture2D>("path");
+            mapScreen.HeroTex = Content.Load<Texture2D>("achilles");
 
-            mapScreen.Cities = Content.Load<XMLLibrary.SerializableList<XMLLibrary.City>>("cities");
+            mapScreen.SetScreenSize(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+
+            mapScreen.SetCities(Content.Load<XMLLibrary.SerializableList<XMLLibrary.City>>("cities"));
 
 
         }
@@ -91,6 +90,12 @@ namespace WrathOfTheGods
             {
                 input.Add(new GestureInput(TouchPanel.ReadGesture()));
             }
+
+            //this makes it so the InputSet is only empty if the user is actually not touching the screen
+            //(or ConsumeAll was called)
+            TouchCollection touches = TouchPanel.GetState();
+            if (touches.Count > 0)
+                input.Add(new GestureInput(new GestureSample(GestureType.None, System.TimeSpan.Zero, touches[0].Position, new Vector2(), new Vector2(), new Vector2())));
 
             ScreenManager.screenManager.Update(new InputSet(input));
 

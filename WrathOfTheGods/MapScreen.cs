@@ -19,31 +19,40 @@ using WrathOfTheGods.XMLLibrary;
 
 namespace WrathOfTheGods
 {
+
+    /// <summary>
+    /// Handles the graphical elements of the Map-level game.
+    /// </summary>
     class MapScreen : Screen
     {
-        public Texture2D Map
+        internal Texture2D Map
         { set; private get; }
-        public Texture2D CityTex
+        internal Texture2D CityTex
         { set; private get; }
-        public Texture2D Path
+        internal Texture2D Path
+        { set; private get; }
+        internal Texture2D HeroTex
         { set; private get; }
 
         private Vector2 offset;
 
-
-        public SerializableList<City> Cities
-        { set; private get; }
+        MapManager mapManager;
 
         private const int EDGE_BUFFER = 40;
         private const int EDGE_SPEED = 4;
-        private int rightEdge;
-        private int bottomEdge;
+        private static int rightEdge;
+        private static int bottomEdge;
 
-        private const int scale = 5;
-        private const int cityTexSize = 30;
-        private const int citySize = cityTexSize * scale;
-        private Vector2 cityGate = new Vector2(citySize / 2, citySize - 2*scale);  //the offset from the top-left (where the sprite is drawn from) to the center-bottom, where paths are desired to come from
-        private Vector2 pathOffset;
+        internal const int Scale = 5;
+        internal const int CityTexSize = 30;
+        private const int CitySize = CityTexSize * Scale;
+        private static Vector2 cityGate = new Vector2(CitySize / 2, CitySize - 2 * Scale);  //the offset from the top-left (where the sprite is drawn from) to the center-bottom, where paths are desired to come from
+        private static Vector2 pathOffset;
+        internal static Vector2 HeroTexSize
+        { get; private set; } = new Vector2(30, 35);
+        private static Vector2 HeroSize = HeroTexSize * Scale;
+        internal static Vector2 HeroOffset
+        { get; private set; } = HeroSize - new Vector2(CitySize) - new Vector2(5, 10) * Scale;
 
         public MapScreen()
         {
@@ -58,41 +67,61 @@ namespace WrathOfTheGods
         /// <param name="height">The screen's vertical size</param>
         public void SetScreenSize(int width, int height)
         {
-            rightEdge = width - (Map.Width * scale);
-            bottomEdge = height - (Map.Height * scale);
+            rightEdge = width - (Map.Width * Scale);
+            bottomEdge = height - (Map.Height * Scale);
+        }
+
+        public void SetCities(SerializableList<City> cities)
+        {
+            mapManager = new MapManager(cities, new Func<Vector2, Vector2>(ConvertToLogicalSpace));
         }
 
         public void Draw(SpriteBatch drawer)
         {
+            if (mapManager is null)
+                return;
+
             //drawer.Draw(Map, offset, Color.White);
-            drawer.Draw(Map, offset, null, Color.White, 0, new Vector2(0,0), scale, SpriteEffects.None, 0);
+            drawer.Draw(Map, offset, null, Color.White, 0, new Vector2(0,0), Scale, SpriteEffects.None, 0);
             //might actually be easier to do the rectangle version...
 
             if (pathOffset.X == 0 && Path != null)
                 pathOffset = new Vector2(Path.Width / 2, 0);
 
-            foreach(City city in Cities)
+            foreach(City city in mapManager.Cities)
             {
-                drawer.Draw(CityTex, offset + city.Position * scale, null, Color.White, 0, new Vector2(0, 0), scale, SpriteEffects.None, 0.5f);
+                drawer.Draw(CityTex, ConvertToScreenSpace(city.Position), null, Color.White, 0, new Vector2(), Scale, SpriteEffects.None, 0.5f);
 
-                Vector2 home = (city.Position * scale) + offset + cityGate;
+                Vector2 home = ConvertToScreenSpace(city.Position) + cityGate;
                 foreach(City neighbor in city.GetNeighbors())
                 {
                     //to prevent two paths drawing over each other, and to make sure paths draw in the direction that looks better
                     if(city.Position.X >= neighbor.Position.X)
                     {
-                        Vector2 destination = neighbor.Position * scale + offset + cityGate;
+                        Vector2 destination = ConvertToScreenSpace(neighbor.Position) + cityGate;
 
                         Vector2 route = home - destination;
                         float angle = (float)Math.Atan2(route.Y, route.X);
                         //initial angle is off by a quarter circle, so
                         angle += .5f * (float)Math.PI;
 
-                        Rectangle pathBox = new Rectangle(0, 0, Path.Width, (int)Math.Floor(route.Length() / scale));
-                        drawer.Draw(Path, home - pathOffset * scale, pathBox, Color.White, angle, pathOffset, scale, SpriteEffects.None, 0.25f);
+                        Rectangle pathBox = new Rectangle(0, 0, Path.Width, (int)Math.Floor(route.Length() / Scale));
+                        drawer.Draw(Path, home - pathOffset * Scale, pathBox, Color.White, angle, pathOffset, Scale, SpriteEffects.None, 0.25f);
                         
                     }
                 }
+            }
+
+            Hero activeHero = mapManager.activeHero;
+
+            foreach(Hero hero in mapManager.Heroes)
+            {
+                Vector2 position = ConvertToScreenSpace(hero.Location.Position) - HeroOffset;
+
+                if (hero == activeHero)
+                    position += mapManager.activeHeroDelta;
+
+                drawer.Draw(HeroTex, position, null, Color.White, 0, new Vector2(), Scale, SpriteEffects.None, 0.6f);
             }
         }
 
@@ -109,37 +138,63 @@ namespace WrathOfTheGods
         }
 
 
+        private Vector2 ConvertToLogicalSpace(Vector2 point)
+        {
+            point = point - offset;
+            point = point / Scale;
+            return point;
+        }
+
+        private Vector2 ConvertToScreenSpace(Vector2 point)
+        {
+            point = point * Scale;
+            point = point + offset;
+            return point;
+        }
+
+
         private Vector2 inertia = new Vector2(0,0);
         private bool touching;
         public (bool updateBelow, bool shouldClose) Update(InputSet input)
         {
-            GestureInput gesture = input.Consume(new GestureIdentifier(GestureType.FreeDrag)) as GestureInput;
+            if (mapManager is null)
+                return (false, false);
 
-            if(gesture != null)
+            //if actively touching, take input before passing it on
+            if (touching)
             {
-                inertia = gesture.Gesture.Delta;
-                touching = true;
+                if (input.IsEmpty())
+                    touching = false;
+
+                GestureInput gesture = input.Consume(new GestureIdentifier(GestureType.FreeDrag)) as GestureInput;
+
+                if (gesture != null)
+                    inertia = gesture.Gesture.Delta;
+
+                gesture = input.Consume(new GestureIdentifier(GestureType.DragComplete)) as GestureInput;
+                if (gesture != null)
+                    touching = false;
+                
             }
 
-            gesture = input.Consume(new GestureIdentifier(GestureType.DragComplete)) as GestureInput;
+            mapManager.Update(input);
 
-            if (gesture != null)
+            if(!touching)
             {
-                touching = false;
+                GestureInput gesture = input.Consume(new GestureIdentifier(GestureType.FreeDrag)) as GestureInput;
+
+                if (gesture != null)
+                {
+                    inertia = gesture.Gesture.Delta;
+                    touching = true;
+                }
             }
 
+
+            //panning block
             if (inertia.Length() != 0 && !float.IsNaN(inertia.X) && !float.IsNaN(inertia.Y))
             {
                 offset += inertia;
-
-                if (offset.X > 0)
-                    offset.X = 0;
-                if (offset.Y > 0)
-                    offset.Y = 0;
-                if (offset.X < rightEdge)
-                    offset.X = rightEdge;
-                if (offset.Y < bottomEdge)
-                    offset.Y = bottomEdge;
 
                 if (!touching)
                 {
@@ -157,6 +212,18 @@ namespace WrathOfTheGods
 
                     inertia -= reduct;
                 }
+            }
+
+            //Edge detect block
+            {
+                if (offset.X > 0)
+                    offset.X = 0;
+                if (offset.Y > 0)
+                    offset.Y = 0;
+                if (offset.X < rightEdge)
+                    offset.X = rightEdge;
+                if (offset.Y < bottomEdge)
+                    offset.Y = bottomEdge;
 
                 if (offset.X > -EDGE_BUFFER)
                     inertia.X = -EDGE_SPEED;
@@ -168,7 +235,7 @@ namespace WrathOfTheGods
                     inertia.Y = EDGE_SPEED;
             }
 
-            return (false, false); 
+            return (false, false);
             //TODO: make returns actually do something.
         }
 

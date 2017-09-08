@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Activity1.cs" />
     <Compile Include="GestureInput.cs" />
+    <Compile Include="Hero.cs" />
+    <Compile Include="MapManager.cs" />
     <Compile Include="MapScreen.cs" />
     <Compile Include="TopLevel.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />

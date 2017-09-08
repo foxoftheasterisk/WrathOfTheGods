@@ -40,6 +40,10 @@ namespace WrathOfTheGods.XMLLibrary
         //public Vector2 spriteVector
         //TODO: draw individual sprites
 
+        [ContentSerializerIgnore]
+        public CityGameData data;
+        //seperates out any runtime data from the XML-serialized permanent data
+
         public City()
         {
             neighbors = new SerializableList<City>();
@@ -77,4 +81,7 @@ namespace WrathOfTheGods.XMLLibrary
             return neighbors.Contains(other);
         }
     }
+
+    public abstract class CityGameData
+    { }
 }
