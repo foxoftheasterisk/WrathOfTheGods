@@ -20,5 +20,8 @@ namespace WrathOfTheGods
 
         public City Location
         { get; set; }
+
+        public Faction Faction
+        { get; internal set; }
     }
 }

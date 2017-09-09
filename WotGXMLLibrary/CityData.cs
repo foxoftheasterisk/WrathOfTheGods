@@ -51,15 +51,6 @@ namespace WrathOfTheGods.XMLLibrary
             neighbors = new SerializableList<CityData>();
         }
 
-        //I want this to be protected, but if it is then EditableCity can't actually call it :/
-        public CityData(CityData city)
-        {
-            Name = city.Name;
-            Region = city.Region;
-            position = city.Position;
-            neighbors = city.GetNeighborsSerializable();
-        }
-
         protected CityData(string name, string region, Vector2 _position)
         {
             Name = name;
@@ -71,11 +62,6 @@ namespace WrathOfTheGods.XMLLibrary
         public List<CityData> GetNeighbors()
         {
             return new List<CityData>(neighbors);
-        }
-
-        private SerializableList<CityData> GetNeighborsSerializable()
-        {
-            return new SerializableList<CityData>(neighbors);
         }
 
         public bool HasNeighbor(CityData other)
@@ -90,16 +76,28 @@ namespace WrathOfTheGods.XMLLibrary
     /// </summary>
     public abstract class CityGameData
     {
-        protected CityData cityData;
+        private CityData cityData;
 
-        public string Name => cityData.Name;
-        public string Region => cityData.Region;
-        public Vector2 Position => cityData.Position;
+        public string Name
+        { get => cityData.Name; }
+        public string Region
+        { get => cityData.Region; }
+        public Vector2 Position
+        { get => cityData.Position; }
+        protected List<CityData> GetBaseNeighbors()
+        {
+            return cityData.GetNeighbors();
+        }
 
         protected CityGameData(CityData data)
         {
             cityData = data;
             cityData.Parent = this;
+        }
+
+        public bool HasNeighbor(CityGameData other)
+        {
+            return cityData.HasNeighbor(other.cityData);
         }
     }
 }

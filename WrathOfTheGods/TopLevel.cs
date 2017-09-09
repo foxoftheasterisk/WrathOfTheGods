@@ -55,8 +55,10 @@ namespace WrathOfTheGods
 
             mapScreen.Map = Content.Load<Texture2D>("greece");
             mapScreen.CityTex = Content.Load<Texture2D>("basiccity");
-            mapScreen.Path = Content.Load<Texture2D>("path");
+            mapScreen.SmallPath = Content.Load<Texture2D>("smallpath");
+            mapScreen.LargePath = Content.Load<Texture2D>("path");
             mapScreen.HeroTex = Content.Load<Texture2D>("achilles");
+            mapScreen.FactionShieldTex = Content.Load<Texture2D>("shield");
 
             mapScreen.SetScreenSize(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 

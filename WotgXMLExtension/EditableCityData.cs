@@ -14,16 +14,8 @@ namespace WrathOfTheGods.XMLLibrary.EditingExtension
         public EditableCityData() : base()
         { }
 
-        public EditableCityData(CityData city) : base(city)
-        { }
-
         public EditableCityData(string name, string region, Vector2 _position) : base (name, region, _position)
         { }
-
-        public CityData Base()
-        {
-            return new CityData(this);
-        }
 
         public void AddNeighbor(CityData neighbor)
         {

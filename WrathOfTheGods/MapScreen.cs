@@ -27,32 +27,47 @@ namespace WrathOfTheGods
     {
         internal Texture2D Map
         { set; private get; }
-        internal Texture2D CityTex
-        { set; private get; }
-        internal Texture2D Path
-        { set; private get; }
-        internal Texture2D HeroTex
-        { set; private get; }
-
         private Vector2 offset;
-
-        MapManager mapManager;
-
         private const int EDGE_BUFFER = 40;
         private const int EDGE_SPEED = 4;
         private static int rightEdge;
         private static int bottomEdge;
 
-        internal const int Scale = 5;
+        internal Texture2D CityTex
+        { set; private get; }
         internal const int CityTexSize = 30;
         private const int CitySize = CityTexSize * Scale;
+
         private static Vector2 cityGate = new Vector2(CitySize / 2, CitySize - 2 * Scale);  //the offset from the top-left (where the sprite is drawn from) to the center-bottom, where paths are desired to come from
-        private static Vector2 pathOffset;
+
+        internal Texture2D SmallPath
+        { set; private get; }
+        private static Vector2 smallPathOffset;
+
+        internal Texture2D LargePath
+        { set; private get; }
+        private static Vector2 largePathOffset;
+
+
+        internal Texture2D HeroTex
+        { set; private get; }
         internal static Vector2 HeroTexSize
         { get; private set; } = new Vector2(30, 35);
         private static Vector2 HeroSize = HeroTexSize * Scale;
         internal static Vector2 HeroOffset
         { get; private set; } = HeroSize - new Vector2(CitySize) - new Vector2(5, 10) * Scale;
+
+        internal Texture2D FactionShieldTex
+        { set; private get; }
+        private static Vector2 ShieldOffset = new Vector2(-2, 20) * Scale;
+        
+
+        MapManager mapManager;
+
+
+
+
+        internal const int Scale = 5;
 
         public MapScreen()
         {
@@ -85,10 +100,12 @@ namespace WrathOfTheGods
             drawer.Draw(Map, offset, null, Color.White, 0, new Vector2(0,0), Scale, SpriteEffects.None, 0);
             //might actually be easier to do the rectangle version...
 
-            if (pathOffset.X == 0 && Path != null)
-                pathOffset = new Vector2(Path.Width / 2, 0);
+            if (smallPathOffset.X == 0 && SmallPath != null)
+                smallPathOffset = new Vector2(SmallPath.Width / 2, 0);
+            if (largePathOffset.X == 0 && LargePath != null)
+                largePathOffset = new Vector2(LargePath.Width / 2, 0);
 
-            foreach(City city in mapManager.Cities)
+            foreach (City city in mapManager.Cities)
             {
                 drawer.Draw(CityTex, ConvertToScreenSpace(city.Position), null, Color.White, 0, new Vector2(), Scale, SpriteEffects.None, 0.5f);
 
@@ -105,10 +122,15 @@ namespace WrathOfTheGods
                         //initial angle is off by a quarter circle, so
                         angle += .5f * (float)Math.PI;
 
-                        Rectangle pathBox = new Rectangle(0, 0, Path.Width, (int)Math.Floor(route.Length() / Scale));
-                        drawer.Draw(Path, home - pathOffset * Scale, pathBox, Color.White, angle, pathOffset, Scale, SpriteEffects.None, 0.25f);
+                        Rectangle pathBox = new Rectangle(0, 0, SmallPath.Width, (int)Math.Floor(route.Length() / Scale));
+                        drawer.Draw(SmallPath, home - smallPathOffset * Scale, pathBox, Color.White, angle, smallPathOffset, Scale, SpriteEffects.None, 0.25f);
                         
                     }
+                }
+
+                if(city.Faction != null)
+                {
+                    drawer.Draw(FactionShieldTex, ConvertToScreenSpace(city.Position) + ShieldOffset, null, city.Faction.Color, 0, new Vector2(), Scale, SpriteEffects.None, 0.55f);
                 }
             }
 
@@ -123,6 +145,56 @@ namespace WrathOfTheGods
 
                 drawer.Draw(HeroTex, position, null, Color.White, 0, new Vector2(), Scale, SpriteEffects.None, 0.6f);
             }
+
+            if(activeHero != null)
+            {
+                List<City> completed = new List<City>();
+                Queue<City> pathOut = new Queue<City>();
+
+                pathOut.Enqueue(activeHero.Location);
+
+                
+
+                while (pathOut.Count > 0)
+                {
+                    City current = pathOut.Dequeue();
+                    if (completed.Contains(current))
+                        continue;
+
+                    completed.Add(current);
+
+                    Vector2 home = ConvertToScreenSpace(current.Position) + cityGate;
+
+                    foreach(City neighbor in current.GetNeighbors())
+                    {
+                        if (completed.Contains(neighbor) || pathOut.Contains(neighbor))
+                            continue;  //continues the inner loop
+
+                        SpriteEffects flip = SpriteEffects.None;
+                        if(current.Position.X < neighbor.Position.X)
+                        {
+                            flip = SpriteEffects.FlipHorizontally;
+                        }
+
+                        Vector2 destination = ConvertToScreenSpace(neighbor.Position) + cityGate;
+
+                        Vector2 route = home - destination;
+                        float angle = (float)Math.Atan2(route.Y, route.X);
+                        //initial angle is off by a quarter circle, so
+                        angle += .5f * (float)Math.PI;
+
+                        Rectangle pathBox = new Rectangle(0, 0, LargePath.Width, (int)Math.Floor(route.Length() / Scale));
+                        drawer.Draw(LargePath, home - largePathOffset * Scale, pathBox, Color.White, angle, largePathOffset, Scale, flip, 0.26f);
+
+                        if (neighbor.Faction == activeHero.Faction)
+                            pathOut.Enqueue(neighbor);
+                        else
+                            completed.Add(neighbor);
+                    }
+                }
+            }
+
+
         }
 
         public bool DrawUnder()

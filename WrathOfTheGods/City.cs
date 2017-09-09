@@ -16,7 +16,10 @@ namespace WrathOfTheGods
 {
     class City : CityGameData
     {
-        Faction faction;
+        public Faction Faction
+        { get; internal set; }
+        //the only reason this is even an INTERNAL set is to make it work with Faction's add/remove functions
+        //ALWAYS CALL THE ADDTO OR LEAVE FACTION FUNCTIONS
 
         //this will need expanding, probably
         public City(CityData data) : base(data)
@@ -27,10 +30,15 @@ namespace WrathOfTheGods
             f.AddCity(this);
         }
 
+        public void LeaveFaction()
+        {
+            Faction.RemoveCity(this);
+        }
+
         public List<City> GetNeighbors()
         {
             List<City> cities = new List<City>();
-            List<CityData> neighborData = cityData.GetNeighbors();
+            List<CityData> neighborData = GetBaseNeighbors();
             foreach(CityData neighborDatum in neighborData)
             {
                 cities.Add((City)neighborDatum.Parent);

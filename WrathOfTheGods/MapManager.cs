@@ -38,10 +38,19 @@ namespace WrathOfTheGods
 
             Heroes = new List<Hero>();
 
-            //TODO: remove this
+            //TODO: remove test code
             Hero achilles = new Hero();
             achilles.Location = Cities[5];
             Heroes.Add(achilles);
+
+            Faction achaea = new Faction("Achaea", Color.Firebrick);
+
+            achilles.Faction = achaea;
+
+            achaea.AddCity(Cities[5]);
+            achaea.AddCity(Cities[7]);
+            achaea.AddCity(Cities[8]);
+            achaea.AddCity(Cities[2]);
         }
 
 
@@ -126,7 +135,7 @@ namespace WrathOfTheGods
 
         private Vector2 GetLogicalPosition(Hero hero)
         {
-            return hero.Location.Position + HeroOffset;
+            return hero.Location.Position - HeroOffset;
         }
 
         private void TryMove(Hero hero, City city)
