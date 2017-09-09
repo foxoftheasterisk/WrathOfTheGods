@@ -19,9 +19,8 @@ namespace WrathOfTheGods
     class MapManager
     {
 
-        private const int CitySize = MapScreen.CityTexSize;
-        private static Vector2 HeroSize = MapScreen.HeroTexSize;
-        private static Vector2 HeroOffset = MapScreen.HeroOffset / MapScreen.Scale;
+        private static int CitySize = MapScreen.CitySize;
+        private static Vector2 HeroSize = MapScreen.HeroSize;
 
         public List<City> Cities
         { get; private set; }
@@ -34,7 +33,7 @@ namespace WrathOfTheGods
         {
             Cities = cities;
 
-            convert = convertToLogical;
+            ConvertToLogicalSpace = convertToLogical;
 
             Heroes = new List<Hero>();
 
@@ -92,7 +91,7 @@ namespace WrathOfTheGods
 
         }
 
-        private Func<Vector2, Vector2> convert;
+        private Func<Vector2, Vector2> ConvertToLogicalSpace;
 
         /// <summary>
         /// Finds a city, if there is one, at the designated point.
@@ -112,14 +111,14 @@ namespace WrathOfTheGods
 
         private City GetCityAtScreenPoint(Vector2 point)
         {
-            return GetCityAtLogicalPoint(convert(point));
+            return GetCityAtLogicalPoint(ConvertToLogicalSpace(point));
         }
 
         private Hero GetHeroAtLogicalPoint(Vector2 point)
         {
             foreach(Hero hero in Heroes)
             {
-                Vector2 position = GetLogicalPosition(hero);
+                Vector2 position = hero.GetLogicalPosition();
 
                 if (position.X < point.X && position.Y < point.Y
                     && position.X + HeroSize.X > point.X && position.Y + HeroSize.Y > point.Y)
@@ -130,12 +129,7 @@ namespace WrathOfTheGods
 
         private Hero GetHeroAtScreenPoint(Vector2 point)
         {
-            return GetHeroAtLogicalPoint(convert(point));
-        }
-
-        private Vector2 GetLogicalPosition(Hero hero)
-        {
-            return hero.Location.Position - HeroOffset;
+            return GetHeroAtLogicalPoint(ConvertToLogicalSpace(point));
         }
 
         private void TryMove(Hero hero, City city)

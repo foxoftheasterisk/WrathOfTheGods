@@ -11,6 +11,7 @@ using Android.Views;
 using Android.Widget;
 
 using WrathOfTheGods.XMLLibrary;
+using Microsoft.Xna.Framework;
 
 namespace WrathOfTheGods
 {
@@ -23,5 +24,10 @@ namespace WrathOfTheGods
 
         public Faction Faction
         { get; internal set; }
+
+        public Vector2 GetLogicalPosition()
+        {
+            return Location.Position - MapScreen.HeroOffset;
+        }
     }
 }
