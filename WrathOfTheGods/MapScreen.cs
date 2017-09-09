@@ -42,9 +42,9 @@ namespace WrathOfTheGods
         private static Vector2 ScreenSize;
         private static Vector2 MapSize;
 
-        private static float zoom = MaxZoom;
-        private const float zoomSpeedFactor = 0.1f;
-        private const int MaxZoom = 5;
+        private static float zoom = MaxZoom / 2;
+        private const float zoomSpeedFactor = 0.005f;
+        private const int MaxZoom = 10;
 
         internal Texture2D CityTex
         {
@@ -160,6 +160,36 @@ namespace WrathOfTheGods
                 }
             }
 
+            //zoom block
+            {
+                if (input.Consume(out InputItem ii, new GestureIdentifier(GestureType.Pinch)))
+                {
+                    GestureSample pinch = ((GestureInput)ii).Gesture;
+                    Vector2 center = (pinch.Position + pinch.Position2) / 2;
+                    Vector2 logicalCenter = ConvertToLogicalSpace(center);
+
+                    float origDist = (pinch.Position - pinch.Position2).Length();
+                    float newDist = ((pinch.Position + pinch.Delta) - (pinch.Position2 + pinch.Delta2)).Length();
+
+                    zoom = zoom * origDist / newDist;
+
+                    //the map is tall and the screen is wide, so only the width should be a problem
+                    //but, yanno, checking both doesn't hurt?
+                    Vector2 projectedMapSize = MapSize * zoom;
+                    if (projectedMapSize.X < ScreenSize.X)
+                        zoom = ScreenSize.X / MapSize.X;
+
+                    projectedMapSize = MapSize * zoom;
+                    if (projectedMapSize.Y < ScreenSize.Y)
+                        zoom = ScreenSize.Y / MapSize.Y;
+
+                    if (zoom > MaxZoom)
+                        zoom = MaxZoom;
+
+                    //keep it centered where we are, not on the top-left of the map
+                    offset = center - (logicalCenter * zoom);
+                }
+            }
 
             //panning block
             if (inertia.Length() != 0 && !float.IsNaN(inertia.X) && !float.IsNaN(inertia.Y))
