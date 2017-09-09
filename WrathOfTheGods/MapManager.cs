@@ -16,7 +16,7 @@ using Microsoft.Xna.Framework.Input.Touch;
 
 namespace WrathOfTheGods
 {
-    class MapManager
+    class MapManager : IInputRetainer
     {
 
         private static int CitySize = MapScreen.CitySize;
@@ -53,42 +53,41 @@ namespace WrathOfTheGods
         }
 
 
-        internal Hero activeHero;
+        internal Hero activeHero = null;
         internal Vector2 activeHeroDelta;
         private Vector2 lastScreenPoint;
         public void Update(InputSet input)
         {
-            if(activeHero != null)
-            {
-
-                //null indicates lost focus - another screen jacked the FreeDrag gesture.
-                //in this case, we want to stop dragging
-                if (input.Consume(out InputItem ii, new GestureIdentifier(GestureType.FreeDrag)))
-                {
-                    GestureInput gi = (GestureInput)ii;
-
-                    activeHeroDelta += gi.Gesture.Delta;
-                    lastScreenPoint = gi.Gesture.Position;
-                }
-                else if (input.IsEmpty())
-                {
-                    City destination = GetCityAtScreenPoint(lastScreenPoint);
-                    if (destination != null)
-                        TryMove(activeHero, destination);
-
-                    activeHero = null;
-                }
-                
-            }
-            else
+            if(activeHero is null)
             {
                 if(input.Consume(out InputItem ii, new GestureOnHero(GestureType.FreeDrag, new Func<Vector2, Hero>(GetHeroAtScreenPoint))))
                 {
                     activeHero = GetHeroAtScreenPoint(((GestureInput)ii).Gesture.Position);
                     activeHeroDelta = new Vector2(0);
+                    ScreenManager.screenManager.RetainInput(this);
                 }
             }
 
+        }
+
+        public void HandleRetainedInput(InputSet input)
+        {
+            if (input.Consume(out InputItem ii, new GestureIdentifier(GestureType.FreeDrag)))
+            {
+                GestureInput gi = (GestureInput)ii;
+
+                activeHeroDelta += gi.Gesture.Delta;
+                lastScreenPoint = gi.Gesture.Position;
+            }
+            else if (input.IsEmpty())
+            {
+                City destination = GetCityAtScreenPoint(lastScreenPoint);
+                if (destination != null)
+                    TryMove(activeHero, destination);
+
+                activeHero = null;
+                ScreenManager.screenManager.EndRetainedInput(this);
+            }
         }
 
         private Func<Vector2, Vector2> ConvertToLogicalSpace;
