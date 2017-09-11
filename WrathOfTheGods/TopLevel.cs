@@ -53,24 +53,16 @@ namespace WrathOfTheGods
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            mapScreen.Map = Content.Load<Texture2D>("greece");
-            mapScreen.CityTex = Content.Load<Texture2D>("basiccity");
-            mapScreen.SmallPath = Content.Load<Texture2D>("smallpath");
-            mapScreen.LargePath = Content.Load<Texture2D>("path");
-            mapScreen.HeroTex = Content.Load<Texture2D>("achilles");
-            mapScreen.FactionShieldTex = Content.Load<Texture2D>("shield");
+            ContentHolder.LoadContent(Content);
 
-            XMLLibrary.SerializableList<XMLLibrary.CityData> cityData = Content.Load<XMLLibrary.SerializableList<XMLLibrary.CityData>>("cities");
             List<City> cities = new List<City>();
 
-            foreach(XMLLibrary.CityData citydatum in cityData)
+            foreach(XMLLibrary.CityData citydatum in ContentHolder.CityData)
             {
                 cities.Add(new City(citydatum));
             }
 
-            mapScreen.SetCities(cities);
-
-
+            mapScreen.DoContentBasedInitialization(cities);
         }
 
         /// <summary>

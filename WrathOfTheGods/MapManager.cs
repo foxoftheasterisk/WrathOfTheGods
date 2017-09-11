@@ -68,7 +68,7 @@ namespace WrathOfTheGods
         private Vector2 lastScreenPoint;
         public void Update(InputSet input)
         {
-            if(activeHero is null)
+            if(activeHero is null && !ScreenManager.screenManager.HasRetainer())
             {
                 if(input.Consume(out InputItem ii, new GestureOnHero(GestureType.FreeDrag, new Func<Vector2, Hero>(GetHeroAtScreenPoint))))
                 {

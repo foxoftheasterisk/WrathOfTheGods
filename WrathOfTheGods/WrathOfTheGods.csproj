@@ -60,7 +60,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
+    <Compile Include="BattleScreen.cs" />
     <Compile Include="City.cs" />
+    <Compile Include="ContentHolder.cs" />
     <Compile Include="Faction.cs" />
     <Compile Include="GestureInput.cs" />
     <Compile Include="Hero.cs" />

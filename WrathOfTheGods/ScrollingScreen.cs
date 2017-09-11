@@ -46,7 +46,6 @@ namespace WrathOfTheGods
         protected Vector2 ScreenSize
         { private get; set; }
 
-        private bool touching;
         private Vector2 inertia;
 
         protected ScrollingScreen()
@@ -70,13 +69,12 @@ namespace WrathOfTheGods
 
         public virtual (bool updateBelow, bool shouldClose) Update(InputSet input)
         {
-            if (!touching)
+            if (!ScreenManager.screenManager.HasRetainer())
             {
                 if (input.Consume(out InputItem ii, new GestureIdentifier(GestureType.FreeDrag)))
                 {
                     inertia = ((GestureInput)ii).Gesture.Delta;
                     ScreenManager.screenManager.RetainInput(this);
-                    touching = true;
                 }
             }
 
@@ -91,7 +89,7 @@ namespace WrathOfTheGods
                     float origDist = (pinch.Position - pinch.Position2).Length();
                     float newDist = ((pinch.Position + pinch.Delta) - (pinch.Position2 + pinch.Delta2)).Length();
 
-                    zoom = zoom * origDist / newDist;
+                    zoom = zoom * newDist / origDist;
 
                     Vector2 projectedLimits = Limits * zoom;
                     if (projectedLimits.X < ScreenSize.X)
@@ -116,22 +114,20 @@ namespace WrathOfTheGods
             {
                 offset += inertia;
 
-                if (!touching)
+                Vector2 reduct = inertia;
+                reduct.Normalize();
+
+                float length = inertia.Length();
+                if (length > 20)
+                    reduct *= length / 20;
+                if (length < 1)
                 {
-                    Vector2 reduct = inertia;
-                    reduct.Normalize();
-
-                    float length = inertia.Length();
-                    if (length > 20)
-                        reduct *= length / 20;
-                    if (length < 1)
-                    {
-                        inertia = new Vector2(0, 0);
-                        reduct = new Vector2(0, 0);
-                    }
-
-                    inertia -= reduct;
+                    inertia = new Vector2(0, 0);
+                    reduct = new Vector2(0, 0);
                 }
+
+                inertia -= reduct;
+
             }
 
             //Edge detect block
@@ -168,7 +164,6 @@ namespace WrathOfTheGods
             if (input.IsEmpty())
             {
                 ScreenManager.screenManager.EndRetainedInput(this);
-                touching = false;
             }
 
 
