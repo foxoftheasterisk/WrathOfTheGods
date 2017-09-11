@@ -36,7 +36,7 @@ namespace WrathOfTheGods
         /// </summary>
         protected override void Initialize()
         {
-            mapScreen = new MapScreen();
+            mapScreen = new MapScreen(new Vector2(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height));
             ScreenManager.screenManager.Push(mapScreen);
 
             TouchPanel.EnabledGestures = GestureType.FreeDrag | GestureType.Pinch | GestureType.DoubleTap | GestureType.Hold;
@@ -59,8 +59,6 @@ namespace WrathOfTheGods
             mapScreen.LargePath = Content.Load<Texture2D>("path");
             mapScreen.HeroTex = Content.Load<Texture2D>("achilles");
             mapScreen.FactionShieldTex = Content.Load<Texture2D>("shield");
-
-            mapScreen.SetScreenSize(GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
             XMLLibrary.SerializableList<XMLLibrary.CityData> cityData = Content.Load<XMLLibrary.SerializableList<XMLLibrary.CityData>>("cities");
             List<City> cities = new List<City>();

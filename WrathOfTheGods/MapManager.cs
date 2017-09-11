@@ -19,9 +19,6 @@ namespace WrathOfTheGods
     class MapManager : IInputRetainer
     {
 
-        private static int CitySize = MapScreen.CitySize;
-        private static Vector2 HeroSize = MapScreen.HeroSize;
-
         public List<City> Cities
         { get; private set; }
         
@@ -50,6 +47,19 @@ namespace WrathOfTheGods
             achaea.AddCity(Cities[7]);
             achaea.AddCity(Cities[8]);
             achaea.AddCity(Cities[2]);
+
+            Faction pieria = new Faction("Pieria", Color.BlueViolet);
+
+            Hero heracles = new Hero();
+            heracles.Location = Cities[36];
+            Heroes.Add(heracles);
+
+            heracles.Faction = pieria;
+
+            pieria.AddCity(cities[35]);
+            pieria.AddCity(cities[37]);
+            pieria.AddCity(cities[36]);
+            pieria.AddCity(cities[39]);
         }
 
 
@@ -102,7 +112,7 @@ namespace WrathOfTheGods
             foreach(City city in Cities)
             {
                 if (city.Position.X < point.X && city.Position.Y < point.Y
-                    && city.Position.X + CitySize > point.X && city.Position.Y + CitySize > point.Y)
+                    && city.Position.X + MapScreen.CitySize > point.X && city.Position.Y + MapScreen.CitySize > point.Y)
                     return city;
             }
             return null;
@@ -120,7 +130,7 @@ namespace WrathOfTheGods
                 Vector2 position = hero.GetLogicalPosition();
 
                 if (position.X < point.X && position.Y < point.Y
-                    && position.X + HeroSize.X > point.X && position.Y + HeroSize.Y > point.Y)
+                    && position.X + MapScreen.HeroSize.X > point.X && position.Y + MapScreen.HeroSize.Y > point.Y)
                     return hero;
             }
             return null;

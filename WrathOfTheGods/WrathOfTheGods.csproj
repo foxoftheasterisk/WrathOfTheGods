@@ -66,6 +66,7 @@
     <Compile Include="Hero.cs" />
     <Compile Include="MapManager.cs" />
     <Compile Include="MapScreen.cs" />
+    <Compile Include="ScrollingScreen.cs" />
     <Compile Include="TopLevel.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
