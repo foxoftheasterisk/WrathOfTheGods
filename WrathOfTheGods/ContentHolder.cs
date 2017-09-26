@@ -42,6 +42,8 @@ namespace WrathOfTheGods
         public static SerializableList<CityData> CityData
         { get; private set; }
 
+
+
         public static void LoadContent(ContentManager content)
         {
             GreeceMap = content.Load<Texture2D>("greece");

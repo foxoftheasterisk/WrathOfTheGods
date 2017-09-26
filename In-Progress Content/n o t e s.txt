@@ -1,1 +1,2 @@
 hex (without protrusion) offset (vs hero): -4, 7
+..or is that hero, vs hex?
