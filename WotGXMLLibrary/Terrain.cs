@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace WrathOfTheGods.XMLLibrary
 {
@@ -16,6 +17,10 @@ namespace WrathOfTheGods.XMLLibrary
         { get; private set; }
 
         public Texture2D Texture
+        { get; private set; }
+
+        [ContentSerializer]
+        public Vector2 Offset
         { get; private set; }
 
         public Terrain()
