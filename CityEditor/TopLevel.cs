@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Xml;
 
-using XMLL = WrathOfTheGods.XMLLibrary;
+using SWF = System.Windows.Forms;
 using Screens;
 
 namespace EditorSuite
@@ -38,6 +38,24 @@ namespace EditorSuite
         {
             base.Initialize();
             IsMouseVisible = true;
+
+            if (SWF.Control.FromHandle(Window.Handle) is SWF.Form window)
+            {
+                window.FormClosing += OnCloseAttempt;
+            }
+        }
+
+        //close handling code based on https://gamedev.stackexchange.com/questions/30957/override-close-button
+
+        bool actuallyClosing = false;
+        bool attemptedClose = false;
+        private void OnCloseAttempt(object sender, SWF.FormClosingEventArgs e)
+        {
+            if(!actuallyClosing)
+            {
+                e.Cancel = true;
+                attemptedClose = true;
+            }
         }
 
         /// <summary>
@@ -48,9 +66,13 @@ namespace EditorSuite
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-           
+
+            
+
             //nope... it's loaded on demand instead
         }
+
+
 
         /// <summary>
         /// UnloadContent will be called once per game and is the place to unload
@@ -75,52 +97,113 @@ namespace EditorSuite
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            ClickType ct = ClickType.None;
-
-            MouseState mouse = Mouse.GetState();
-
-            ClickTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
-            if (mouse.LeftButton == ButtonState.Pressed)
+            InputSet inputSet;
+            //input preparation block
             {
-                if (ClickTimer < System.Windows.Forms.SystemInformation.DoubleClickTime && !clickHeld)
-                    ct = ClickType.Double;
-                else
+                ClickType ct = ClickType.None;
+
+                MouseState mouse = Mouse.GetState();
+
+                ClickTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+                if (mouse.LeftButton == ButtonState.Pressed)
                 {
-                    ct = ClickType.Left;
+                    if (ClickTimer < System.Windows.Forms.SystemInformation.DoubleClickTime && !clickHeld)
+                        ct = ClickType.Double;
+                    else
+                    {
+                        ct = ClickType.Left;
+                    }
+                    ClickTimer = 0;
+                    clickHeld = true;
                 }
-                ClickTimer = 0;
-                clickHeld = true;
+                else
+                    clickHeld = false;
+                if (mouse.RightButton == ButtonState.Pressed)
+                {
+                    ct = ClickType.Right;
+                }
+
+                int scroll = mouse.ScrollWheelValue - lastScroll;
+                lastScroll = mouse.ScrollWheelValue;
+
+                MouseInput mi = new MouseInput(ct, mouse.Position, scroll);
+                List<InputItem> inputList = new List<InputItem>();
+                inputList.Add(mi);
+
+                foreach (Keys key in Keyboard.GetState().GetPressedKeys())
+                {
+                    inputList.Add(new KeyboardInput(key));
+                }
+
+                if (attemptedClose)
+                {
+                    attemptedClose = false;
+                    inputList.Add(new WindowClosedInput());
+                }
+
+                inputSet = new InputSet(inputList);
             }
-            else
-                clickHeld = false;
-            if(mouse.RightButton == ButtonState.Pressed)
-            {
-                ct = ClickType.Right;
-            }
-
-            int scroll = mouse.ScrollWheelValue - lastScroll;
-            lastScroll = mouse.ScrollWheelValue;
-
-            MouseInput mi = new MouseInput(ct, mouse.Position, scroll);
-            List<InputItem> inputList = new List<InputItem>();
-            inputList.Add(mi);
-
-            foreach(Keys key in Keyboard.GetState().GetPressedKeys())
-            {
-                inputList.Add(new KeyboardInput(key));
-            }
-
-            InputSet inputSet = new InputSet(inputList);
 
             ScreenManager.screenManager.Update(inputSet);
 
+
+
+            if(inputSet.Consume(out _, new WindowClosedInputIdentifier()))
+            {
+                actuallyClosing = true;
+                Exit();
+            }
+
             if (ScreenManager.screenManager.IsEmpty())
             {
-                
                 IEditor editor;
 
-                //TODO: editor choice window
-                editor = new CityEditor(GraphicsDevice.DisplayMode.Width - 50, GraphicsDevice.DisplayMode.Height - 150);
+                EditorChoiceDialog dialog = new EditorChoiceDialog();
+                SWF.DialogResult result = dialog.ShowDialog();
+                string filename = null;
+                if(result == SWF.DialogResult.Yes)
+                {
+                    SWF.OpenFileDialog ofd = new SWF.OpenFileDialog();
+                    ofd.Multiselect = false;
+                    ofd.Filter = "XML files (.xml)|*.xml";
+
+                    if(ofd.ShowDialog() == SWF.DialogResult.OK)
+                    {
+                        filename = ofd.FileName;
+                    }                  
+                }
+                else if(result == SWF.DialogResult.Abort)
+                {
+                    actuallyClosing = true;
+                    Exit();
+                }
+
+                if(filename != null)
+                {
+                    switch (dialog.editorChoiceDropdown.Text)
+                    {
+                        case "City Editor":
+                            editor = new CityEditor(filename, GraphicsDevice.DisplayMode.Width - 50, GraphicsDevice.DisplayMode.Height - 150);
+                            break;
+                        default:
+                            actuallyClosing = true;
+                            Exit();
+                            return;
+                    }
+                }
+                else
+                {
+                    switch(dialog.editorChoiceDropdown.Text)
+                    {
+                        case "City Editor":
+                            editor = new CityEditor(GraphicsDevice.DisplayMode.Width - 50, GraphicsDevice.DisplayMode.Height - 150);
+                            break;
+                        default:
+                            actuallyClosing = true;
+                            Exit();
+                            return;
+                    }
+                }
 
                 graphics.PreferredBackBufferWidth = editor.Width;
                 graphics.PreferredBackBufferHeight = editor.Height;

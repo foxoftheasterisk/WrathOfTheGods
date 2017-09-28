@@ -38,6 +38,8 @@ namespace EditorSuite
         private readonly int bottomEdge;
         //to be reusable, there should be a rightEdge and a horizontalOffset... but i don't actually need them for this so fuckit
 
+        private string filename = null;
+
         //static constructors are a thing, apparently
         //this is maybe not entirely stable (it relies on ContentHolder being initialized first) but...
         //if it works, it works; if not, i'll make it a more explicit singleton type thing
@@ -58,15 +60,19 @@ namespace EditorSuite
 
             Width = Math.Min(map.Width, maxWidth);
             Height = Math.Min(map.Height, maxHeight);
-
             bottomEdge = Height - map.Height;
         }
 
-        public CityEditor(string filename, int maxWidth, int madHeight)
+        public CityEditor(string _filename, int maxWidth, int maxHeight) : this(maxWidth, maxHeight)
         {
-            //TODO: this
+            filename = _filename;
 
-
+            //okay not having checking here is a really bad idea
+            //...oh well!
+            using (XmlReader input = XmlReader.Create(filename))
+            {
+                cities = IntermediateSerializer.Deserialize<SerializableList<CityData>>(input, null);
+            }
         }
 
         TopLevel.ClickType actionType = TopLevel.ClickType.None;
@@ -199,9 +205,22 @@ namespace EditorSuite
                 }
             }
 
-            if(input.Consume(out _, new KeyboardInputIdentifier(Microsoft.Xna.Framework.Input.Keys.Escape)))
+            if (input.Consume(out _, new KeyboardInputIdentifier(Microsoft.Xna.Framework.Input.Keys.S)))
             {
-                return (false, true);
+                Save();
+            }
+
+            if (input.Consume(out _, new KeyboardInputIdentifier(Microsoft.Xna.Framework.Input.Keys.Escape))
+             || input.Consume(out _, new WindowClosedInputIdentifier()))
+            {
+                DialogResult r = MessageBox.Show("Would you like to save your work before closing?", "Save your work?", MessageBoxButtons.YesNoCancel);
+                if (r != DialogResult.Cancel)
+                {
+                    if (r == DialogResult.Yes)
+                        Save();
+
+                    return (false, true);
+                }
             }
 
             return (false, false);
@@ -249,15 +268,30 @@ namespace EditorSuite
             return false;
         }
 
-        public void Close()
+        private void Save()
         {
-            //TODO: make saving and closing not inextricably linked
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                OverwritePrompt = true,
+                Filter = "XML files(.xml)| *.xml",
+                AddExtension = true
+            };
+
+            if (filename == null)
+            {
+                sfd.FileName = "citiesEditable.xml";
+                sfd.Title = "Save editable data";
+
+                sfd.ShowDialog();
+
+                filename = sfd.FileName;
+            }
 
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
 
             //written as editable
-            using (XmlWriter writer = XmlWriter.Create("citiesEditable.xml", settings))
+            using (XmlWriter writer = XmlWriter.Create(filename, settings))
             {
                 IntermediateSerializer.Serialize<SerializableList<CityData>>(writer, cities, null);
             }
@@ -268,27 +302,35 @@ namespace EditorSuite
             //just have no exception handling
             //it's fine, probably
             //this tool is not intended for release
-            StreamReader input;
-            input = new StreamReader("citiesEditable.xml");
-            StreamWriter output = new StreamWriter("cities.xml", false);
-
-            while (true)
+            using (StreamReader input = new StreamReader(filename))
             {
-                string line = input.ReadLine();
-                if (line is null)
-                    break;
+                sfd.FileName = "cities.xml";
+                sfd.Title = "Save exported data";
+                sfd.ShowDialog();
 
-                //since they have all the same serializable members,
-                //we can just replace the type name
-                //and it's fine
-                line = line.Replace("WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity", "XMLLibrary:City");
-                output.WriteLine(line);
+                using (StreamWriter output = new StreamWriter(sfd.FileName, false))
+                {
+
+                    while (true)
+                    {
+                        string line = input.ReadLine();
+                        if (line is null)
+                            break;
+
+                        //since they have all the same serializable members,
+                        //we can just replace the type name
+                        //and it's fine
+                        line = line.Replace("WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity", "XMLLibrary:City");
+                        output.WriteLine(line);
+                    }
+                }
             }
+            MessageBox.Show("Saved!");
+        }
 
-            input.Close();
-            input.Dispose();
-            output.Close();
-            output.Dispose();
+        public void Close()
+        {
+            
         }
     }
 }
