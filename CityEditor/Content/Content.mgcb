@@ -58,8 +58,3 @@
 /processorParam:TextureFormat=Color
 /build:path.png
 
-#begin citiesEditable.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:citiesEditable.xml
-

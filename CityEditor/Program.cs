@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CityEditor
+namespace EditorSuite
 {
 #if WINDOWS || LINUX
     /// <summary>

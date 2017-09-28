@@ -9,8 +9,8 @@
     <ProjectGuid>{1672107A-84C1-4AF2-8E5E-D5B2C7A2A9E6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CityEditor</RootNamespace>
-    <AssemblyName>CityEditor</AssemblyName>
+    <RootNamespace>EditorSuite</RootNamespace>
+    <AssemblyName>EditorSuite</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -63,7 +63,11 @@
     <Compile Include="CityNameEntryBox.Designer.cs">
       <DependentUpon>CityNameEntryBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="ContentHolder.cs" />
+    <Compile Include="CityEditor.cs" />
     <Compile Include="Editor.cs" />
+    <Compile Include="KeyboardInput.cs" />
+    <Compile Include="MouseInput.cs" />
     <Compile Include="TopLevel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -78,6 +82,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -87,6 +94,7 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="app.manifest" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="CityNameEntryBox.resx">
@@ -113,6 +121,7 @@
       <Name>WotGXMLLibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="..\ScreenManager\ScreenManager.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <PropertyGroup>

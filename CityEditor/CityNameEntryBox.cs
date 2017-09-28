@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace CityEditor
+namespace EditorSuite
 {
     public partial class CityNameEntryBox : Form
     {

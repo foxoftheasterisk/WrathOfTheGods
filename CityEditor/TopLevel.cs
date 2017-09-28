@@ -8,8 +8,9 @@ using System.IO;
 using System.Xml;
 
 using XMLL = WrathOfTheGods.XMLLibrary;
+using Screens;
 
-namespace CityEditor
+namespace EditorSuite
 {
     /// <summary>
     /// This is the main type for your game.
@@ -19,14 +20,12 @@ namespace CityEditor
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        Editor editor;
-
         public TopLevel()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            editor = new Editor();
+            ContentHolder.Initialize(Content);
         }
 
         /// <summary>
@@ -49,22 +48,8 @@ namespace CityEditor
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            Texture2D map = Content.Load<Texture2D>("greece");
-
-            editor.Map = map;
-            editor.CityTex = Content.Load<Texture2D>("basiccity");
-            editor.Path = Content.Load<Texture2D>("path");
-            editor.Font = Content.Load<SpriteFont>("somefont");
-
-            editor.cities = Content.Load<XMLL.SerializableList<XMLL.CityData>>("citiesEditable");
-
-            graphics.PreferredBackBufferWidth = map.Width;
-            int height = GraphicsDevice.DisplayMode.Height - 150;
-            graphics.PreferredBackBufferHeight = height;
-            graphics.ApplyChanges();
-
-            editor.BottomEdge = height - map.Height;
+           
+            //nope... it's loaded on demand instead
         }
 
         /// <summary>
@@ -80,7 +65,7 @@ namespace CityEditor
         //double click handling code mostly copied from https://stackoverflow.com/questions/16111555/how-to-subscribe-to-double-clicks
 
         double ClickTimer = 0;
-        internal enum ClickType { Left, Double, Right, None}
+        internal enum ClickType { Left = 0b0001, Double = 0b0010, Right = 0b0100, None = 0b1000, All = 0b1111 }
         bool clickHeld = false;
         int lastScroll = 0;
         /// <summary>
@@ -90,48 +75,6 @@ namespace CityEditor
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
-            {
-                XmlWriterSettings settings = new XmlWriterSettings();
-                settings.Indent = true;
-
-                //written as editable
-                using (XmlWriter writer = XmlWriter.Create("citiesEditable.xml", settings))
-                {
-                    IntermediateSerializer.Serialize<XMLL.SerializableList<XMLL.CityData>>(writer, editor.cities, null);
-                }
-
-                
-                //but we want a version where they're all just Cities, for actual deployment
-                //so 
-
-                //just have no exception handling
-                //it's fine, probably
-                StreamReader input;
-                input = new StreamReader("citiesEditable.xml");
-                StreamWriter output = new StreamWriter("cities.xml", false);
-
-                while (true)
-                {
-                    string line = input.ReadLine();
-                    if (line is null)
-                        break;
-
-                    //since they have all the same serializable members,
-                    //we can just replace the type name
-                    //and it's fine
-                    line = line.Replace("WrathOfTheGods.XMLLibrary.EditingExtension.EditableCity", "XMLLibrary:City");
-                    output.WriteLine(line);
-                }
-
-                input.Close();
-                input.Dispose();
-                output.Close();
-                output.Dispose();
-
-                Exit();
-            }
-            
             ClickType ct = ClickType.None;
 
             MouseState mouse = Mouse.GetState();
@@ -158,7 +101,33 @@ namespace CityEditor
             int scroll = mouse.ScrollWheelValue - lastScroll;
             lastScroll = mouse.ScrollWheelValue;
 
-            editor.Update(ct, mouse.Position, scroll);
+            MouseInput mi = new MouseInput(ct, mouse.Position, scroll);
+            List<InputItem> inputList = new List<InputItem>();
+            inputList.Add(mi);
+
+            foreach(Keys key in Keyboard.GetState().GetPressedKeys())
+            {
+                inputList.Add(new KeyboardInput(key));
+            }
+
+            InputSet inputSet = new InputSet(inputList);
+
+            ScreenManager.screenManager.Update(inputSet);
+
+            if (ScreenManager.screenManager.IsEmpty())
+            {
+                
+                IEditor editor;
+
+                //TODO: editor choice window
+                editor = new CityEditor(GraphicsDevice.DisplayMode.Width - 50, GraphicsDevice.DisplayMode.Height - 150);
+
+                graphics.PreferredBackBufferWidth = editor.Width;
+                graphics.PreferredBackBufferHeight = editor.Height;
+                graphics.ApplyChanges();
+
+                ScreenManager.screenManager.Push(editor);
+            }
 
             base.Update(gameTime);
         }
@@ -171,7 +140,7 @@ namespace CityEditor
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            editor.Draw(spriteBatch);
+            ScreenManager.screenManager.Draw(spriteBatch, SpriteSortMode.FrontToBack, SamplerState.LinearWrap);
 
             base.Draw(gameTime);
         }

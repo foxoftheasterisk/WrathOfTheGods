@@ -1,4 +1,4 @@
-﻿namespace CityEditor
+﻿namespace EditorSuite
 {
     partial class CityNameEntryBox
     {
